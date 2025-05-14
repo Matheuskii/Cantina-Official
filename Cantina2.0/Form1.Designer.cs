@@ -35,8 +35,10 @@
             Carrinho = new ListBox();
             label3 = new Label();
             label2 = new Label();
-            numericUpDown1 = new NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            boxQuantity = new NumericUpDown();
+            boxRemove = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)boxQuantity).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)boxRemove).BeginInit();
             SuspendLayout();
             // 
             // AddButton
@@ -44,7 +46,7 @@
             AddButton.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
             AddButton.Location = new Point(241, 133);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(138, 72);
+            AddButton.Size = new Size(138, 31);
             AddButton.TabIndex = 0;
             AddButton.Text = "Adicionar item";
             AddButton.UseVisualStyleBackColor = true;
@@ -53,21 +55,22 @@
             // removeItem
             // 
             removeItem.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            removeItem.Location = new Point(448, 353);
+            removeItem.Location = new Point(241, 252);
             removeItem.Name = "removeItem";
             removeItem.Size = new Size(146, 68);
             removeItem.TabIndex = 1;
             removeItem.Text = "Remover item";
             removeItem.UseVisualStyleBackColor = true;
+            removeItem.Click += removeItem_Click;
             // 
             // ItemSelected
             // 
             ItemSelected.BackColor = Color.FromArgb(243, 241, 238);
             ItemSelected.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             ItemSelected.FormattingEnabled = true;
-            ItemSelected.Location = new Point(12, 133);
+            ItemSelected.Location = new Point(12, 124);
             ItemSelected.Name = "ItemSelected";
-            ItemSelected.Size = new Size(176, 196);
+            ItemSelected.Size = new Size(189, 196);
             ItemSelected.TabIndex = 4;
             ItemSelected.SelectedIndexChanged += AddButton_Click;
             // 
@@ -87,16 +90,16 @@
             Carrinho.BackColor = Color.FromArgb(243, 241, 238);
             Carrinho.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
             Carrinho.FormattingEnabled = true;
-            Carrinho.Location = new Point(613, 130);
+            Carrinho.Location = new Point(575, 124);
             Carrinho.Name = "Carrinho";
-            Carrinho.Size = new Size(175, 196);
+            Carrinho.Size = new Size(225, 196);
             Carrinho.TabIndex = 6;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Bauhaus 93", 20.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.Location = new Point(30, 80);
+            label3.Location = new Point(35, 80);
             label3.Name = "label3";
             label3.Size = new Size(129, 30);
             label3.TabIndex = 8;
@@ -106,20 +109,28 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Bauhaus 93", 20.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label2.Location = new Point(641, 80);
+            label2.Location = new Point(648, 80);
             label2.Name = "label2";
             label2.Size = new Size(119, 30);
             label2.TabIndex = 9;
             label2.Text = "Carrinho";
             // 
-            // numericUpDown1
+            // boxQuantity
             // 
-            numericUpDown1.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            numericUpDown1.Location = new Point(241, 236);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(149, 21);
-            numericUpDown1.TabIndex = 10;
-            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
+            boxQuantity.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
+            boxQuantity.Location = new Point(241, 208);
+            boxQuantity.Name = "boxQuantity";
+            boxQuantity.Size = new Size(152, 21);
+            boxQuantity.TabIndex = 10;
+            boxQuantity.ValueChanged += numericUpDown1_ValueChanged;
+            // 
+            // boxRemove
+            // 
+            boxRemove.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
+            boxRemove.Location = new Point(227, 326);
+            boxRemove.Name = "boxRemove";
+            boxRemove.Size = new Size(152, 21);
+            boxRemove.TabIndex = 11;
             // 
             // Form1
             // 
@@ -127,7 +138,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
-            Controls.Add(numericUpDown1);
+            Controls.Add(boxRemove);
+            Controls.Add(boxQuantity);
             Controls.Add(label2);
             Controls.Add(label3);
             Controls.Add(Carrinho);
@@ -137,7 +149,8 @@
             Controls.Add(AddButton);
             Name = "Form1";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)boxQuantity).EndInit();
+            ((System.ComponentModel.ISupportInitialize)boxRemove).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -151,6 +164,7 @@
         private ListBox Carrinho;
         private Label label3;
         private Label label2;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown boxQuantity;
+        private NumericUpDown boxRemove;
     }
 }
