@@ -37,6 +37,9 @@
             label2 = new Label();
             boxQuantity = new NumericUpDown();
             boxRemove = new NumericUpDown();
+            finishBtn = new Button();
+            dateTimePicker1 = new DateTimePicker();
+            dateTimePicker2 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)boxQuantity).BeginInit();
             ((System.ComponentModel.ISupportInitialize)boxRemove).BeginInit();
             SuspendLayout();
@@ -44,7 +47,7 @@
             // AddButton
             // 
             AddButton.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            AddButton.Location = new Point(241, 133);
+            AddButton.Location = new Point(207, 148);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(138, 31);
             AddButton.TabIndex = 0;
@@ -55,9 +58,9 @@
             // removeItem
             // 
             removeItem.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            removeItem.Location = new Point(241, 252);
+            removeItem.Location = new Point(415, 148);
             removeItem.Name = "removeItem";
-            removeItem.Size = new Size(146, 68);
+            removeItem.Size = new Size(138, 31);
             removeItem.TabIndex = 1;
             removeItem.Text = "Remover item";
             removeItem.UseVisualStyleBackColor = true;
@@ -90,10 +93,11 @@
             Carrinho.BackColor = Color.FromArgb(243, 241, 238);
             Carrinho.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
             Carrinho.FormattingEnabled = true;
-            Carrinho.Location = new Point(575, 124);
+            Carrinho.Location = new Point(563, 124);
             Carrinho.Name = "Carrinho";
             Carrinho.Size = new Size(225, 196);
             Carrinho.TabIndex = 6;
+            Carrinho.SelectedIndexChanged += Carrinho_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -118,19 +122,45 @@
             // boxQuantity
             // 
             boxQuantity.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            boxQuantity.Location = new Point(241, 208);
+            boxQuantity.Location = new Point(207, 185);
             boxQuantity.Name = "boxQuantity";
-            boxQuantity.Size = new Size(152, 21);
+            boxQuantity.Size = new Size(138, 21);
             boxQuantity.TabIndex = 10;
             boxQuantity.ValueChanged += numericUpDown1_ValueChanged;
             // 
             // boxRemove
             // 
             boxRemove.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            boxRemove.Location = new Point(227, 326);
+            boxRemove.Location = new Point(415, 185);
             boxRemove.Name = "boxRemove";
-            boxRemove.Size = new Size(152, 21);
+            boxRemove.Size = new Size(138, 21);
             boxRemove.TabIndex = 11;
+            // 
+            // finishBtn
+            // 
+            finishBtn.Location = new Point(334, 236);
+            finishBtn.Name = "finishBtn";
+            finishBtn.Size = new Size(103, 50);
+            finishBtn.TabIndex = 12;
+            finishBtn.Text = "Finalizar";
+            finishBtn.UseVisualStyleBackColor = true;
+            finishBtn.Click += finishBtn_Click;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.Location = new Point(674, 9);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(77, 23);
+            dateTimePicker1.TabIndex = 13;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Format = DateTimePickerFormat.Time;
+            dateTimePicker2.Location = new Point(591, 9);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(77, 23);
+            dateTimePicker2.TabIndex = 14;
             // 
             // Form1
             // 
@@ -138,6 +168,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
+            Controls.Add(dateTimePicker2);
+            Controls.Add(dateTimePicker1);
+            Controls.Add(finishBtn);
             Controls.Add(boxRemove);
             Controls.Add(boxQuantity);
             Controls.Add(label2);
@@ -166,5 +199,8 @@
         private Label label2;
         private NumericUpDown boxQuantity;
         private NumericUpDown boxRemove;
+        private Button finishBtn;
+        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePicker2;
     }
 }
