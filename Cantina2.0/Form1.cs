@@ -22,6 +22,7 @@ namespace Cantina2._0
             ListDisp.Items.Add(new Produto("Hambúrguer com Queijo", 9.00));
             ListDisp.Items.Add(new Produto("X-Tudo", 12.00));
             ListDisp.Items.Add(new Produto("Água Mineral(500ml)", 4.00));
+           
         }
         public class Produto
         {
@@ -179,7 +180,7 @@ namespace Cantina2._0
                 Carrinho.Items.RemoveAt(itensParaRemover[i]);
             }
 
-            
+
             boxRemove.Value = 1;
         }
 
@@ -204,7 +205,7 @@ namespace Cantina2._0
      $"Cliente: {nome}\n\n" +
      $"Total a pagar: R${total:F2}\n\n" +
      "COMANDA");
-                    
+
                     MessageBox.Show("Qual quantidade o cliente irá pagar?", "Pagamento");
                     double valorPago = 0;
                     double troco = 0;
@@ -287,7 +288,12 @@ namespace Cantina2._0
                     MessageBox.Show("Selecione uma forma de pagamento.", "Erro");
                     break;
             }
-            
+
+
+        }
+
+        private void ListDisp_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

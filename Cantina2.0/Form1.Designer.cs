@@ -45,16 +45,20 @@
             imageList1 = new ImageList(components);
             imageList2 = new ImageList(components);
             pictureBox1 = new PictureBox();
+            label1 = new Label();
+            label5 = new Label();
+            fileSystemWatcher1 = new FileSystemWatcher();
             ((System.ComponentModel.ISupportInitialize)boxQuantity).BeginInit();
             ((System.ComponentModel.ISupportInitialize)boxRemove).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
             // 
             // AddButton
             // 
             AddButton.BackColor = Color.FromArgb(243, 241, 238);
-            AddButton.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            AddButton.Location = new Point(207, 148);
+            AddButton.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
+            AddButton.Location = new Point(221, 218);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(138, 31);
             AddButton.TabIndex = 0;
@@ -65,8 +69,8 @@
             // removeItem
             // 
             removeItem.BackColor = Color.FromArgb(243, 241, 238);
-            removeItem.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            removeItem.Location = new Point(415, 148);
+            removeItem.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
+            removeItem.Location = new Point(411, 218);
             removeItem.Name = "removeItem";
             removeItem.Size = new Size(138, 31);
             removeItem.TabIndex = 1;
@@ -77,91 +81,97 @@
             // ListDisp
             // 
             ListDisp.BackColor = Color.FromArgb(243, 241, 238);
-            ListDisp.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ListDisp.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
             ListDisp.FormattingEnabled = true;
-            ListDisp.Location = new Point(12, 124);
+            ListDisp.ItemHeight = 14;
+            ListDisp.Location = new Point(8, 147);
             ListDisp.Name = "ListDisp";
-            ListDisp.Size = new Size(189, 196);
+            ListDisp.Size = new Size(189, 186);
             ListDisp.TabIndex = 4;
+            ListDisp.SelectedIndexChanged += ListDisp_SelectedIndexChanged;
             // 
             // Carrinho
             // 
             Carrinho.BackColor = Color.FromArgb(243, 241, 238);
-            Carrinho.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
+            Carrinho.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
             Carrinho.FormattingEnabled = true;
-            Carrinho.Location = new Point(559, 124);
+            Carrinho.ItemHeight = 14;
+            Carrinho.Location = new Point(559, 147);
             Carrinho.Name = "Carrinho";
-            Carrinho.Size = new Size(229, 196);
+            Carrinho.Size = new Size(229, 186);
             Carrinho.TabIndex = 6;
             Carrinho.SelectedIndexChanged += Carrinho_SelectedIndexChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Bauhaus 93", 20.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.Location = new Point(35, 80);
+            label3.Font = new Font("Agrandir Semi Narrow", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(31, 79);
             label3.Name = "label3";
-            label3.Size = new Size(129, 30);
+            label3.Size = new Size(141, 39);
             label3.TabIndex = 8;
             label3.Text = "Cardápio";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Bauhaus 93", 20.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label2.Location = new Point(615, 80);
+            label2.Font = new Font("Agrandir Semi Narrow", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(603, 79);
             label2.Name = "label2";
-            label2.Size = new Size(119, 30);
+            label2.Size = new Size(136, 39);
             label2.TabIndex = 9;
             label2.Text = "Carrinho";
             // 
             // boxQuantity
             // 
-            boxQuantity.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            boxQuantity.Location = new Point(207, 185);
+            boxQuantity.BackColor = Color.FromArgb(243, 241, 238);
+            boxQuantity.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
+            boxQuantity.Location = new Point(221, 268);
             boxQuantity.Name = "boxQuantity";
-            boxQuantity.Size = new Size(138, 21);
+            boxQuantity.Size = new Size(138, 22);
             boxQuantity.TabIndex = 10;
             boxQuantity.ValueChanged += numericUpDown1_ValueChanged;
             // 
             // boxRemove
             // 
             boxRemove.BackColor = Color.FromArgb(243, 241, 238);
-            boxRemove.Font = new Font("Franklin Gothic Book", 9F, FontStyle.Bold);
-            boxRemove.Location = new Point(415, 185);
+            boxRemove.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
+            boxRemove.Location = new Point(411, 268);
             boxRemove.Name = "boxRemove";
-            boxRemove.Size = new Size(138, 21);
+            boxRemove.Size = new Size(138, 22);
             boxRemove.TabIndex = 11;
             // 
             // finishBtn
             // 
-            finishBtn.Font = new Font("Bauhaus 93", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            finishBtn.BackColor = Color.FromArgb(243, 241, 238);
+            finishBtn.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
             finishBtn.ForeColor = Color.FromArgb(17, 25, 12);
-            finishBtn.Location = new Point(313, 348);
+            finishBtn.Location = new Point(288, 344);
             finishBtn.Name = "finishBtn";
-            finishBtn.Size = new Size(121, 50);
+            finishBtn.Size = new Size(158, 75);
             finishBtn.TabIndex = 12;
             finishBtn.Text = "Finalizar";
-            finishBtn.UseVisualStyleBackColor = true;
+            finishBtn.UseVisualStyleBackColor = false;
             finishBtn.Click += finishBtn_Click;
             // 
             // textBox1
             // 
             textBox1.BackColor = Color.FromArgb(243, 241, 238);
-            textBox1.Location = new Point(334, 66);
+            textBox1.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
+            textBox1.Location = new Point(324, 100);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(187, 23);
+            textBox1.Size = new Size(187, 22);
             textBox1.TabIndex = 15;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.FromArgb(225, 255, 0);
-            label4.Font = new Font("Bauhaus 93", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Agrandir Semi Narrow", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(17, 25, 12);
-            label4.Location = new Point(277, 70);
+            label4.Location = new Point(264, 100);
             label4.Name = "label4";
-            label4.Size = new Size(51, 14);
+            label4.Size = new Size(54, 18);
             label4.TabIndex = 16;
             label4.Text = "Cliente:";
             // 
@@ -171,7 +181,7 @@
             comboBox1.ForeColor = Color.FromArgb(17, 25, 12);
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Dinheiro", "Débito", "Crédito", "Pix", "VA", "VR", "" });
-            comboBox1.Location = new Point(313, 230);
+            comboBox1.Location = new Point(305, 310);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 18;
@@ -192,14 +202,40 @@
             // 
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
             pictureBox1.ErrorImage = (Image)resources.GetObject("pictureBox1.ErrorImage");
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
-            pictureBox1.Location = new Point(12, 3);
+            pictureBox1.Location = new Point(12, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(203, 64);
             pictureBox1.TabIndex = 19;
             pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Agrandir Semi Narrow", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(221, 25);
+            label1.Name = "label1";
+            label1.Size = new Size(37, 39);
+            label1.TabIndex = 20;
+            label1.Text = "X";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Agrandir Semi Narrow", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(264, 25);
+            label5.Name = "label5";
+            label5.Size = new Size(120, 39);
+            label5.TabIndex = 21;
+            label5.Text = "Cantina";
+            // 
+            // fileSystemWatcher1
+            // 
+            fileSystemWatcher1.EnableRaisingEvents = true;
+            fileSystemWatcher1.SynchronizingObject = this;
             // 
             // Form1
             // 
@@ -207,6 +243,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
+            Controls.Add(label5);
+            Controls.Add(label1);
             Controls.Add(pictureBox1);
             Controls.Add(comboBox1);
             Controls.Add(label4);
@@ -225,6 +263,7 @@
             ((System.ComponentModel.ISupportInitialize)boxQuantity).EndInit();
             ((System.ComponentModel.ISupportInitialize)boxRemove).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -246,5 +285,8 @@
         private ImageList imageList1;
         private ImageList imageList2;
         private PictureBox pictureBox1;
+        private Label label1;
+        private Label label5;
+        private FileSystemWatcher fileSystemWatcher1;
     }
 }
