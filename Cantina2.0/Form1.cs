@@ -1,5 +1,6 @@
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
 
 namespace Cantina2._0
 {
@@ -12,15 +13,15 @@ namespace Cantina2._0
             boxRemove.Minimum = 1;
             boxQuantity.Minimum = 1;
             // Adicionando produtos à lista
-            ItemSelected.Items.Add(new Produto("Pão de Queijo", 3.50));
-            ItemSelected.Items.Add(new Produto("Coxinha", 5.00));
-            ItemSelected.Items.Add(new Produto("Pastel de Carne", 6.00));
-            ItemSelected.Items.Add(new Produto("Pastel de Queijo", 5.50));
-            ItemSelected.Items.Add(new Produto("Refrigerante Lata", 4.50));
-            ItemSelected.Items.Add(new Produto("Hamburguer Simples", 8.00));
-            ItemSelected.Items.Add(new Produto("Hambúrguer com Queijo", 9.00));
-            ItemSelected.Items.Add(new Produto("X-Tudo", 12.00));
-            ItemSelected.Items.Add(new Produto("Água Mineral(500ml)", 4.00));
+            ListDisp.Items.Add(new Produto("Pão de Queijo", 3.50));
+            ListDisp.Items.Add(new Produto("Coxinha", 5.00));
+            ListDisp.Items.Add(new Produto("Pastel de Carne", 6.00));
+            ListDisp.Items.Add(new Produto("Pastel de Queijo", 5.50));
+            ListDisp.Items.Add(new Produto("Refrigerante Lata", 4.50));
+            ListDisp.Items.Add(new Produto("Hamburguer Simples", 8.00));
+            ListDisp.Items.Add(new Produto("Hambúrguer com Queijo", 9.00));
+            ListDisp.Items.Add(new Produto("X-Tudo", 12.00));
+            ListDisp.Items.Add(new Produto("Água Mineral(500ml)", 4.00));
         }
         public class Produto
         {
@@ -29,7 +30,7 @@ namespace Cantina2._0
             public double Preco { get; set; }
             public Produto(string nome, double preco)
             {
-                // Construtor da classe Produto
+                //Construtor da classe Produto
                 Nome = nome;
                 Preco = preco;
             }
@@ -43,10 +44,10 @@ namespace Cantina2._0
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            // Verifica se algum produto foi selecionado
-            if (ItemSelected.SelectedItem == null)
+            //Verifica se algum produto foi selecionado
+            if (ListDisp.SelectedItem == null)
             {
-                // Se não houver produto selecionado, exibe uma mensagem de erro
+                //Se não houver produto selecionado, exibe uma mensagem de erro
                 MessageBox.Show("Selecione um produto.", "Erro");
                 return;
             }
@@ -59,15 +60,31 @@ namespace Cantina2._0
                 return;
             }
 
-            Produto produtoSelecionado = (Produto)ItemSelected.SelectedItem;
-
-            // Adiciona o produto e a quantidade ao carrinho
-            Carrinho.Items.Add($"{produtoSelecionado} | {QuantidadeSelecionada}");
-
-            // Atualiza o total da compra
+            Produto produtoSelecionado = (Produto)ListDisp.SelectedItem;
+            bool itemExistente = false;
+            for (int i = 0; i < Carrinho.Items.Count; i++)
+            {
+                string item = Carrinho.Items[i].ToString();
+                int posBarra = item.LastIndexOf('|');
+                string nomeProdutoNoCarrinho = posBarra > 0 ? item.Substring(0, posBarra).Trim() : item;
+                if (nomeProdutoNoCarrinho.StartsWith(produtoSelecionado.Nome))
+                {
+                    // Atualiza a quantidade
+                    int quantidadeAtual = int.Parse(item.Substring(item.LastIndexOf('|') + 1).Trim());
+                    quantidadeAtual += QuantidadeSelecionada;
+                    Carrinho.Items[i] = $"{produtoSelecionado} | {quantidadeAtual}";
+                    itemExistente = true;
+                    break;
+                }
+            }
+            // Se o item não existe, adiciona ao carrinho
+            if (!itemExistente)
+            {
+                Carrinho.Items.Add($"{produtoSelecionado} | {QuantidadeSelecionada}");
+            }
             total += produtoSelecionado.Preco * QuantidadeSelecionada;
-
-
+            ListDisp.ClearSelected();
+            boxQuantity.Value = 1;
         }
         public static class Globais
         {
@@ -84,7 +101,7 @@ namespace Cantina2._0
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void removeItem_Click(object sender, EventArgs e)
@@ -104,43 +121,66 @@ namespace Cantina2._0
                 return;
             }
 
-            
             var itensParaRemover = new List<int>();
+            double totalRemovido = 0;
+
             foreach (int index in Carrinho.SelectedIndices)
             {
-                string item = Carrinho.Items[index].ToString();
-                
-                int posBarra = item.LastIndexOf('|');
-                if (posBarra == -1) continue;
+                var itemObj = Carrinho.Items[index];
+                if (itemObj == null) continue;
+                string item = itemObj.ToString();
+                if (string.IsNullOrEmpty(item)) continue;
 
-                string parteQuantidade = item.Substring(posBarra + 1).Trim();
+                int aposBarra = item.LastIndexOf('|');
+                if (aposBarra == -1) continue;
+
+                string parteProduto = item.Substring(0, aposBarra).Trim();
+                string parteQuantidade = item.Substring(aposBarra + 1).Trim();
                 if (!int.TryParse(parteQuantidade, out int quantidadeAtual))
                     continue;
 
+                // Extrai o nome do produto (antes do " - R$")
+                int posPreco = parteProduto.LastIndexOf(" - R$");
+                string nomeProduto = posPreco > 0 ? parteProduto.Substring(0, posPreco).Trim() : parteProduto;
+
+                // Busca o produto na lista de produtos disponíveis para obter o preço
+                Produto? produto = null;
+                foreach (var prod in ListDisp.Items)
+                {
+                    if (prod is Produto p && p.Nome == nomeProduto)
+                    {
+                        produto = p;
+                        break;
+                    }
+                }
+                if (produto == null) continue;
+
+                int quantidadeParaRemover = Math.Min(quantidadeRemover, quantidadeAtual);
+                totalRemovido += produto.Preco * quantidadeParaRemover;
+
                 if (quantidadeAtual > quantidadeRemover)
                 {
-                    // Atualiza a quantidade
-                    string parteProduto = item.Substring(0, posBarra).Trim();
-                    int novaQuantidade = quantidadeAtual - quantidadeRemover;
-                    Carrinho.Items[index] = $"{parteProduto} | {novaQuantidade}";
-                    total -= quantidadeRemover * ((Produto)ItemSelected.SelectedItem).Preco;
+                    quantidadeAtual -= quantidadeRemover;
+                    Carrinho.Items[index] = $"{parteProduto} | {quantidadeAtual}";
+                    Carrinho.ClearSelected();
                 }
                 else
                 {
-                    // Marca para remover o item inteiro
                     itensParaRemover.Add(index);
+                    Carrinho.ClearSelected();
                 }
             }
 
-            // Remove os itens marcados (de trás para frente para não bagunçar os índices)
+            total -= totalRemovido;
+            if (total < 0) total = 0;
+
             for (int i = itensParaRemover.Count - 1; i >= 0; i--)
             {
                 Carrinho.Items.RemoveAt(itensParaRemover[i]);
-                
             }
 
-          
-            boxQuantity.Value = 1;
+            
+            boxRemove.Value = 1;
         }
 
         private void Carrinho_SelectedIndexChanged(object sender, EventArgs e)
@@ -150,15 +190,105 @@ namespace Cantina2._0
 
         private void finishBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Deseja finalizar a compra?", "Finalizar Compra", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (DialogResult == DialogResult.Yes)
+            // Exemplo de criação de uma variável string com o valor da TextBox:
+            string nome = textBox1.Text;
+            if (total == 0)
             {
-                // Aqui você pode adicionar a lógica para finalizar a compra
-                MessageBox.Show($"Total da compra: R$ {total:F2}", "Compra Finalizada");
-                Carrinho.Items.Clear();
-                total = 0;
+                MessageBox.Show("Insira itens no carrinho");
+                return;
             }
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    MessageBox.Show(
+     $"Cliente: {nome}\n\n" +
+     $"Total a pagar: R${total:F2}\n\n" +
+     "COMANDA");
+                    
+                    MessageBox.Show("Qual quantidade o cliente irá pagar?", "Pagamento");
+                    double valorPago = 0;
+                    double troco = 0;
+                    while (valorPago < total)
+                    {
+                        string input = Microsoft.VisualBasic.Interaction.InputBox("Digite o valor pago:", "Pagamento", "0");
+                        if (double.TryParse(input, out valorPago))
+                        {
+                            if (valorPago < total)
+                            {
+                                MessageBox.Show($"Valor insuficiente. Faltam R$ {total - valorPago:F2}.");
+                            }
+                            else
+                            {
+                                troco = valorPago - total;
+                                MessageBox.Show($"Troco: R$ {troco:F2}");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Valor inválido. Tente novamente.");
+                        }
+                    }
 
-        } 
+                    Carrinho.Items.Clear();
+                    textBox1.Clear();
+                    total = 0;
+                    break;
+                case 1:
+                    MessageBox.Show(
+     $"Cliente: {nome}\n\n" +
+     $"Total a pagar: R${total:F2}\n\n" +
+     "COMANDA");
+                    Carrinho.Items.Clear();
+                    textBox1.Clear();
+                    comboBox1.SelectedIndex = 0;
+                    total = 0;
+                    break;
+                case 2:
+                    MessageBox.Show(
+     $"Cliente: {nome}\n\n" +
+     $"Total a pagar: R${total:F2}\n\n" +
+     "COMANDA");
+                    Carrinho.Items.Clear();
+                    textBox1.Clear();
+                    comboBox1.Items.Clear();
+                    total = 0;
+                    break;
+                case 3:
+                    MessageBox.Show(
+     $"Cliente: {nome}\n\n" +
+     $"Total a pagar: R${total:F2}\n\n" +
+     "COMANDA");
+                    Carrinho.Items.Clear();
+                    textBox1.Clear();
+                    comboBox1.Items.Clear();
+                    total = 0;
+                    break;
+                case 4:
+                    MessageBox.Show(
+     $"Cliente: {nome}\n\n" +
+     $"Total a pagar: R${total:F2}\n\n" +
+     "COMANDA");
+                    Carrinho.Items.Clear();
+                    textBox1.Clear();
+                    comboBox1.Items.Clear();
+                    total = 0;
+                    break;
+                case 5:
+                    MessageBox.Show(
+      $"Cliente: {nome}\n\n" +
+      $"Total a pagar: R${total:F2}\n\n" +
+      "COMANDA");
+                    Carrinho.Items.Clear();
+                    textBox1.Clear();
+                    comboBox1.Items.Clear();
+                    total = 0;
+                    break;
+                default:
+                    MessageBox.Show("Selecione uma forma de pagamento.", "Erro");
+                    break;
+            }
+            
+
+        }
     }
 }
