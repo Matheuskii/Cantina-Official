@@ -22,23 +22,7 @@ namespace Cantina2._0
             ListDisp.Items.Add(new Produto("Hambúrguer com Queijo", 9.00));
             ListDisp.Items.Add(new Produto("X-Tudo", 12.00));
             ListDisp.Items.Add(new Produto("Água Mineral(500ml)", 4.00));
-           
-        }
-        public class Produto
-        {
-            // Classe para representar um produto
-            public string Nome { get; set; }
-            public double Preco { get; set; }
-            public Produto(string nome, double preco)
-            {
-                //Construtor da classe Produto
-                Nome = nome;
-                Preco = preco;
-            }
-            public override string ToString()
-            {
-                return $"{Nome} - R$ {Preco:F2}";
-            }
+
         }
 
         private double total = 0; // Campo para armazenar o total da compra
@@ -90,6 +74,7 @@ namespace Cantina2._0
         public static class Globais
         {
             public static int QuantidadeSelecionada { get; set; }
+           
 
         }
 
@@ -109,7 +94,7 @@ namespace Cantina2._0
         {
             int quantidadeRemover = (int)boxRemove.Value;
 
-            // Verifica se algum item está selecionado no carrinho
+
             if (Carrinho.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Selecione um item do carrinho para remover.", "Erro");
@@ -191,8 +176,21 @@ namespace Cantina2._0
 
         private void finishBtn_Click(object sender, EventArgs e)
         {
-            // Exemplo de criação de uma variável string com o valor da TextBox:
+            
+            
+
             string nome = textBox1.Text;
+            if (string.IsNullOrWhiteSpace(nome))
+            {
+                MessageBox.Show("Por favor, insira o nome do cliente.", "Erro");
+                return;
+            }
+            if (Carrinho.Items.Count == 0)
+            {
+                MessageBox.Show("O carrinho está vazio. Adicione itens antes de finalizar o pedido.", "Erro");
+                return;
+            }
+
             if (total == 0)
             {
                 MessageBox.Show("Insira itens no carrinho");
@@ -222,6 +220,8 @@ namespace Cantina2._0
                             {
                                 troco = valorPago - total;
                                 MessageBox.Show($"Troco: R$ {troco:F2}");
+                                MessageBox.Show("Pagamento realizado com sucesso!");
+
                             }
                         }
                         else
@@ -229,70 +229,69 @@ namespace Cantina2._0
                             MessageBox.Show("Valor inválido. Tente novamente.");
                         }
                     }
-
-                    Carrinho.Items.Clear();
-                    textBox1.Clear();
-                    total = 0;
+                    
                     break;
                 case 1:
                     MessageBox.Show(
      $"Cliente: {nome}\n\n" +
      $"Total a pagar: R${total:F2}\n\n" +
      "COMANDA");
-                    Carrinho.Items.Clear();
-                    textBox1.Clear();
-                    comboBox1.SelectedIndex = 0;
-                    total = 0;
+                    
                     break;
                 case 2:
                     MessageBox.Show(
      $"Cliente: {nome}\n\n" +
      $"Total a pagar: R${total:F2}\n\n" +
      "COMANDA");
-                    Carrinho.Items.Clear();
-                    textBox1.Clear();
-                    comboBox1.Items.Clear();
-                    total = 0;
+                    
                     break;
                 case 3:
                     MessageBox.Show(
      $"Cliente: {nome}\n\n" +
      $"Total a pagar: R${total:F2}\n\n" +
      "COMANDA");
-                    Carrinho.Items.Clear();
-                    textBox1.Clear();
-                    comboBox1.Items.Clear();
-                    total = 0;
+                    
                     break;
                 case 4:
                     MessageBox.Show(
      $"Cliente: {nome}\n\n" +
      $"Total a pagar: R${total:F2}\n\n" +
      "COMANDA");
-                    Carrinho.Items.Clear();
-                    textBox1.Clear();
-                    comboBox1.Items.Clear();
-                    total = 0;
+                    
                     break;
                 case 5:
                     MessageBox.Show(
       $"Cliente: {nome}\n\n" +
       $"Total a pagar: R${total:F2}\n\n" +
       "COMANDA");
-                    Carrinho.Items.Clear();
-                    textBox1.Clear();
-                    comboBox1.Items.Clear();
-                    total = 0;
+                    
                     break;
                 default:
                     MessageBox.Show("Selecione uma forma de pagamento.", "Erro");
                     break;
             }
+            // Adiciona os itens do carrinho ao pedido atual
+            foreach (Produto item in Carrinho.Items)
+            {
+                PersistenteProdutoa.Produtos.Add(item);
+            }
+            Form2 form2 = new Form2();
+            form2.Show();
+            Carrinho.Items.Clear();
+            textBox1.Clear();
+            total = 0;
+            
+
 
 
         }
 
         private void ListDisp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
