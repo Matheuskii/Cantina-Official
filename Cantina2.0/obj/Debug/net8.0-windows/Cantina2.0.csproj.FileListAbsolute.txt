@@ -16,4 +16,4 @@ C:\Users\25163072\source\repos\Cantina2.0\Cantina2.0\obj\Debug\net8.0-windows\Ca
 C:\Users\25163072\source\repos\Cantina2.0\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.genruntimeconfig.cache
 C:\Users\25163072\source\repos\Cantina2.0\Cantina2.0\obj\Debug\net8.0-windows\ref\Cantina2.0.dll
 C:\Users\25163072\source\repos\Cantina2.0\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.Properties.Resources.resources
-C:\Users\25163072\source\repos\Cantina2.0\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.Form2.resources
+C:\Users\25163072\source\repos\Cantina2.0\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.TelaBalcao.resources

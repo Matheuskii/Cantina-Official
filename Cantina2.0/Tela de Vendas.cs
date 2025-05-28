@@ -1,6 +1,8 @@
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
+using Cantina2._0.Models;
+using static Cantina2._0.BancoDePedidos;
 
 namespace Cantina2._0
 {
@@ -9,10 +11,10 @@ namespace Cantina2._0
         public Form1()
         {
             InitializeComponent();
-            // Definindo o valor mínimo para os NumericUpDowns
+            
             boxRemove.Minimum = 1;
             boxQuantity.Minimum = 1;
-            // Adicionando produtos à lista
+          
             ListDisp.Items.Add(new Produto("Pão de Queijo", 3.50));
             ListDisp.Items.Add(new Produto("Coxinha", 5.00));
             ListDisp.Items.Add(new Produto("Pastel de Carne", 6.00));
@@ -25,20 +27,19 @@ namespace Cantina2._0
 
         }
 
-        private double total = 0; // Campo para armazenar o total da compra
+        private double total = 0;
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            //Verifica se algum produto foi selecionado
+           
             if (ListDisp.SelectedItem == null)
             {
-                //Se não houver produto selecionado, exibe uma mensagem de erro
+               
                 MessageBox.Show("Selecione um produto.", "Erro");
                 return;
             }
             int QuantidadeSelecionada = (int)boxQuantity.Value;
 
-            // Verifica se a quantidade é válida
             if (QuantidadeSelecionada <= 0)
             {
                 MessageBox.Show("Selecione a quantidade do produto.", "Erro");
@@ -54,7 +55,6 @@ namespace Cantina2._0
                 string nomeProdutoNoCarrinho = posBarra > 0 ? item.Substring(0, posBarra).Trim() : item;
                 if (nomeProdutoNoCarrinho.StartsWith(produtoSelecionado.Nome))
                 {
-                    // Atualiza a quantidade
                     int quantidadeAtual = int.Parse(item.Substring(item.LastIndexOf('|') + 1).Trim());
                     quantidadeAtual += QuantidadeSelecionada;
                     Carrinho.Items[i] = $"{produtoSelecionado} | {quantidadeAtual}";
@@ -62,11 +62,11 @@ namespace Cantina2._0
                     break;
                 }
             }
-            // Se o item não existe, adiciona ao carrinho
             if (!itemExistente)
             {
                 Carrinho.Items.Add($"{produtoSelecionado} | {QuantidadeSelecionada}");
             }
+            
             total += produtoSelecionado.Preco * QuantidadeSelecionada;
             ListDisp.ClearSelected();
             boxQuantity.Value = 1;
@@ -125,11 +125,11 @@ namespace Cantina2._0
                 if (!int.TryParse(parteQuantidade, out int quantidadeAtual))
                     continue;
 
-                // Extrai o nome do produto (antes do " - R$")
+               
                 int posPreco = parteProduto.LastIndexOf(" - R$");
                 string nomeProduto = posPreco > 0 ? parteProduto.Substring(0, posPreco).Trim() : parteProduto;
 
-                // Busca o produto na lista de produtos disponíveis para obter o preço
+
                 Produto? produto = null;
                 foreach (var prod in ListDisp.Items)
                 {
@@ -176,8 +176,8 @@ namespace Cantina2._0
 
         private void finishBtn_Click(object sender, EventArgs e)
         {
-            
-            
+
+
 
             string nome = textBox1.Text;
             if (string.IsNullOrWhiteSpace(nome))
@@ -229,61 +229,73 @@ namespace Cantina2._0
                             MessageBox.Show("Valor inválido. Tente novamente.");
                         }
                     }
-                    
+
                     break;
                 case 1:
                     MessageBox.Show(
      $"Cliente: {nome}\n\n" +
      $"Total a pagar: R${total:F2}\n\n" +
      "COMANDA");
-                    
+                    MessageBox.Show("Pagamento realizado com sucesso!");
                     break;
                 case 2:
                     MessageBox.Show(
      $"Cliente: {nome}\n\n" +
      $"Total a pagar: R${total:F2}\n\n" +
      "COMANDA");
-                    
+                    MessageBox.Show("Pagamento realizado com sucesso!");
                     break;
                 case 3:
                     MessageBox.Show(
      $"Cliente: {nome}\n\n" +
      $"Total a pagar: R${total:F2}\n\n" +
      "COMANDA");
-                    
+                    MessageBox.Show("Pagamento realizado com sucesso!");
                     break;
                 case 4:
                     MessageBox.Show(
      $"Cliente: {nome}\n\n" +
      $"Total a pagar: R${total:F2}\n\n" +
      "COMANDA");
-                    
+                    MessageBox.Show("Pagamento realizado com sucesso!");
                     break;
                 case 5:
                     MessageBox.Show(
       $"Cliente: {nome}\n\n" +
       $"Total a pagar: R${total:F2}\n\n" +
       "COMANDA");
-                    
+                    MessageBox.Show("Pagamento realizado com sucesso!");
                     break;
                 default:
-                    MessageBox.Show("Selecione uma forma de pagamento.", "Erro");
-                    break;
+                    MessageBox.Show("Selecione um método de pagamento válido.", "Erro");
+                    return;
             }
-            // Adiciona os itens do carrinho ao pedido atual
-            foreach (Produto item in Carrinho.Items)
+            string nomeProduto = ;
+
+            Pedido pedido = new Pedido()
             {
-                PersistenteProdutoa.Produtos.Add(item);
-            }
-            Form2 form2 = new Form2();
-            form2.Show();
+                NomeCliebte = nome,
+                NomeProduto = ,
+                Data = DateTime.Now,
+                Status = StatusPedido.A_Fazer
+            };
+            ItemPedido itemPedido;
+            itemPedido = new ItemPedido
+            {
+                NomeProduto = Carrinho.ProductName,
+                Preco = total,
+                Quantidade = 1
+            };
+
+            BancoPedidos.AdicionarPedido(pedido);
+
             Carrinho.Items.Clear();
             textBox1.Clear();
             total = 0;
-            
 
-
-
+            MessageBox.Show($"Pedido do cliente {nome} registrado com sucesso!");
+            TelaBalcao telaBalcao = new TelaBalcao();
+            telaBalcao.Show();
         }
 
         private void ListDisp_SelectedIndexChanged(object sender, EventArgs e)

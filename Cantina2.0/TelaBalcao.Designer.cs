@@ -1,6 +1,6 @@
 ﻿namespace Cantina2._0
 {
-    partial class Form2
+    partial class TelaBalcao
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaBalcao));
             pictureBox1 = new PictureBox();
-            listView1 = new ListView();
-            nomeColuna = new ColumnHeader();
-            pedidoColuna = new ColumnHeader();
-            qntdColuna = new ColumnHeader();
-            dataColuna = new ColumnHeader();
+            form1BindingSource = new BindingSource(components);
+            form1BindingSource1 = new BindingSource(components);
+            form1BindingSource2 = new BindingSource(components);
+            dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)form1BindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)form1BindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)form1BindingSource2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -46,61 +50,58 @@
             pictureBox1.ErrorImage = (Image)resources.GetObject("pictureBox1.ErrorImage");
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
-            pictureBox1.Location = new Point(571, 12);
+            pictureBox1.Location = new Point(12, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(203, 64);
             pictureBox1.TabIndex = 20;
             pictureBox1.TabStop = false;
             // 
-            // listView1
+            // form1BindingSource
             // 
-            listView1.BackColor = SystemColors.Info;
-            listView1.Columns.AddRange(new ColumnHeader[] { nomeColuna, pedidoColuna, qntdColuna, dataColuna });
-            listView1.Font = new Font("Agrandir Narrow Medium", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            listView1.Location = new Point(12, 110);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(299, 240);
-            listView1.TabIndex = 21;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
+            form1BindingSource.DataSource = typeof(Form1);
             // 
-            // nomeColuna
+            // form1BindingSource1
             // 
-            nomeColuna.Text = "Nome cliente ";
+            form1BindingSource1.DataSource = typeof(Form1);
             // 
-            // pedidoColuna
+            // form1BindingSource2
             // 
-            pedidoColuna.Text = "Pedidos";
+            form1BindingSource2.DataSource = typeof(Form1);
             // 
-            // qntdColuna
+            // dataGridView1
             // 
-            qntdColuna.Text = "Quantidade";
+            dataGridView1.AllowUserToOrderColumns = true;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 82);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(762, 356);
+            dataGridView1.TabIndex = 21;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             // 
-            // dataColuna
-            // 
-            dataColuna.Text = "Data/hora";
-            // 
-            // Form2
+            // TelaBalcao
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
-            Controls.Add(listView1);
+            Controls.Add(dataGridView1);
             Controls.Add(pictureBox1);
-            Name = "Form2";
+            Name = "TelaBalcao";
             Text = "Form2";
             Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)form1BindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)form1BindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)form1BindingSource2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
         private PictureBox pictureBox1;
-        private ListView listView1;
-        private ColumnHeader nomeColuna;
-        private ColumnHeader pedidoColuna;
-        private ColumnHeader qntdColuna;
-        private ColumnHeader dataColuna;
+        private BindingSource form1BindingSource;
+        private BindingSource form1BindingSource1;
+        private BindingSource form1BindingSource2;
+        private DataGridView dataGridView1;
     }
 }
