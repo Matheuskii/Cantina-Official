@@ -48,6 +48,7 @@
             label1 = new Label();
             label5 = new Label();
             fileSystemWatcher1 = new FileSystemWatcher();
+            checkViagem = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)boxQuantity).BeginInit();
             ((System.ComponentModel.ISupportInitialize)boxRemove).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -58,7 +59,7 @@
             // 
             AddButton.BackColor = Color.FromArgb(243, 241, 238);
             AddButton.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
-            AddButton.Location = new Point(221, 218);
+            AddButton.Location = new Point(221, 147);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(138, 31);
             AddButton.TabIndex = 0;
@@ -70,7 +71,7 @@
             // 
             removeItem.BackColor = Color.FromArgb(243, 241, 238);
             removeItem.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
-            removeItem.Location = new Point(411, 218);
+            removeItem.Location = new Point(411, 147);
             removeItem.Name = "removeItem";
             removeItem.Size = new Size(138, 31);
             removeItem.TabIndex = 1;
@@ -126,7 +127,7 @@
             // 
             boxQuantity.BackColor = Color.FromArgb(243, 241, 238);
             boxQuantity.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
-            boxQuantity.Location = new Point(221, 268);
+            boxQuantity.Location = new Point(221, 208);
             boxQuantity.Name = "boxQuantity";
             boxQuantity.Size = new Size(138, 22);
             boxQuantity.TabIndex = 10;
@@ -136,7 +137,7 @@
             // 
             boxRemove.BackColor = Color.FromArgb(243, 241, 238);
             boxRemove.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
-            boxRemove.Location = new Point(411, 268);
+            boxRemove.Location = new Point(411, 208);
             boxRemove.Name = "boxRemove";
             boxRemove.Size = new Size(138, 22);
             boxRemove.TabIndex = 11;
@@ -181,9 +182,9 @@
             comboBox1.ForeColor = Color.FromArgb(17, 25, 12);
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Dinheiro", "Débito", "Crédito", "Pix", "VA", "VR", "" });
-            comboBox1.Location = new Point(305, 310);
+            comboBox1.Location = new Point(298, 310);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
+            comboBox1.Size = new Size(141, 23);
             comboBox1.TabIndex = 18;
             // 
             // imageList1
@@ -237,12 +238,25 @@
             fileSystemWatcher1.EnableRaisingEvents = true;
             fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // checkViagem
+            // 
+            checkViagem.AutoSize = true;
+            checkViagem.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            checkViagem.Location = new Point(298, 256);
+            checkViagem.Name = "checkViagem";
+            checkViagem.Size = new Size(131, 20);
+            checkViagem.TabIndex = 23;
+            checkViagem.Text = "É para a viagem?";
+            checkViagem.UseVisualStyleBackColor = true;
+            checkViagem.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
+            Controls.Add(checkViagem);
             Controls.Add(label5);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
@@ -260,6 +274,7 @@
             Controls.Add(AddButton);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)boxQuantity).EndInit();
             ((System.ComponentModel.ISupportInitialize)boxRemove).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -288,5 +303,6 @@
         private Label label1;
         private Label label5;
         private FileSystemWatcher fileSystemWatcher1;
+        private CheckBox checkViagem;
     }
 }

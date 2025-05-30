@@ -11,19 +11,19 @@ namespace Cantina2._0
         public Form1()
         {
             InitializeComponent();
-            
+
             boxRemove.Minimum = 1;
             boxQuantity.Minimum = 1;
-          
-            ListDisp.Items.Add(new Produto("Pão de Queijo", 3.50));
-            ListDisp.Items.Add(new Produto("Coxinha", 5.00));
-            ListDisp.Items.Add(new Produto("Pastel de Carne", 6.00));
-            ListDisp.Items.Add(new Produto("Pastel de Queijo", 5.50));
-            ListDisp.Items.Add(new Produto("Refrigerante Lata", 4.50));
-            ListDisp.Items.Add(new Produto("Hamburguer Simples", 8.00));
-            ListDisp.Items.Add(new Produto("Hambúrguer com Queijo", 9.00));
-            ListDisp.Items.Add(new Produto("X-Tudo", 12.00));
-            ListDisp.Items.Add(new Produto("Água Mineral(500ml)", 4.00));
+
+            ListDisp.Items.Add(new Produto("Pão de Queijo", 3.50,true));
+            ListDisp.Items.Add(new Produto("Coxinha", 5.00, true));
+            ListDisp.Items.Add(new Produto("Pastel de Carne", 6.00, false));
+            ListDisp.Items.Add(new Produto("Pastel de Queijo", 5.50, false));
+            ListDisp.Items.Add(new Produto("Refrigerante Lata", 4.50, true));
+            ListDisp.Items.Add(new Produto("Hamburguer Simples", 8.00, false));
+            ListDisp.Items.Add(new Produto("Hambúrguer com Queijo", 9.00, false));
+            ListDisp.Items.Add(new Produto("X-Tudo", 12.00, false));
+            ListDisp.Items.Add(new Produto("Água Mineral(500ml)", 4.00, true));
 
         }
 
@@ -31,10 +31,10 @@ namespace Cantina2._0
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-           
+
             if (ListDisp.SelectedItem == null)
             {
-               
+
                 MessageBox.Show("Selecione um produto.", "Erro");
                 return;
             }
@@ -64,6 +64,7 @@ namespace Cantina2._0
             }
             if (!itemExistente)
             {
+               
                 Carrinho.Items.Add($"{produtoSelecionado} | {QuantidadeSelecionada}");
             }
             
@@ -74,7 +75,7 @@ namespace Cantina2._0
         public static class Globais
         {
             public static int QuantidadeSelecionada { get; set; }
-           
+
 
         }
 
@@ -125,7 +126,7 @@ namespace Cantina2._0
                 if (!int.TryParse(parteQuantidade, out int quantidadeAtual))
                     continue;
 
-               
+
                 int posPreco = parteProduto.LastIndexOf(" - R$");
                 string nomeProduto = posPreco > 0 ? parteProduto.Substring(0, posPreco).Trim() : parteProduto;
 
@@ -176,9 +177,6 @@ namespace Cantina2._0
 
         private void finishBtn_Click(object sender, EventArgs e)
         {
-
-
-
             string nome = textBox1.Text;
             if (string.IsNullOrWhiteSpace(nome))
             {
@@ -190,27 +188,40 @@ namespace Cantina2._0
                 MessageBox.Show("O carrinho está vazio. Adicione itens antes de finalizar o pedido.", "Erro");
                 return;
             }
-
             if (total == 0)
             {
                 MessageBox.Show("Insira itens no carrinho");
                 return;
             }
-            switch (comboBox1.SelectedIndex)
-            {
-                case 0:
-                    MessageBox.Show(
-     $"Cliente: {nome}\n\n" +
-     $"Total a pagar: R${total:F2}\n\n" +
-     "COMANDA");
 
+
+            int metodoPagamento = comboBox1.SelectedIndex;
+            double valorPago = 0;
+            double troco = 0;
+            bool pagamentoOk = false;
+            List<string> resumo = new();
+            foreach (ItemPedido itemExt in Carrinho.SelectedItems) 
+            {
+                resumo.Add(itemExt.NomeProduto);
+               
+            }
+            //Lista para a entrega de cozinha
+            
+            switch (metodoPagamento)
+            {
+                case 0: // Dinheiro
+
+                    MessageBox.Show(
+                    $"Cliente: {nome}\n\n" +
+                    $"Total a pagar: R${total:F2}\n\n" +
+                    $"Extrato:{resumo}" +
+                    "COMANDA");
                     MessageBox.Show("Qual quantidade o cliente irá pagar?", "Pagamento");
-                    double valorPago = 0;
-                    double troco = 0;
+
                     while (valorPago < total)
                     {
                         string input = Microsoft.VisualBasic.Interaction.InputBox("Digite o valor pago:", "Pagamento", "0");
-                        if (double.TryParse(input, out valorPago))
+                        if (double.TryParse(input.Replace(',', '.'), out valorPago))
                         {
                             if (valorPago < total)
                             {
@@ -221,7 +232,7 @@ namespace Cantina2._0
                                 troco = valorPago - total;
                                 MessageBox.Show($"Troco: R$ {troco:F2}");
                                 MessageBox.Show("Pagamento realizado com sucesso!");
-
+                                pagamentoOk = true;
                             }
                         }
                         else
@@ -229,65 +240,66 @@ namespace Cantina2._0
                             MessageBox.Show("Valor inválido. Tente novamente.");
                         }
                     }
-
                     break;
-                case 1:
+                    
+                case 1: // Cartão crédito
+                case 2: // Cartão débito
+                case 3: // PIX
+                case 4: // Vale
+                case 5: // Outro
                     MessageBox.Show(
-     $"Cliente: {nome}\n\n" +
-     $"Total a pagar: R${total:F2}\n\n" +
-     "COMANDA");
+                        $"Cliente: {nome}\n\n" +
+                        $"Itens:{Carrinho.SelectedItems.ToString}" +
+                        $"Total a pagar: R${total:F2}\n\n" +
+                        "COMANDA");
                     MessageBox.Show("Pagamento realizado com sucesso!");
-                    break;
-                case 2:
-                    MessageBox.Show(
-     $"Cliente: {nome}\n\n" +
-     $"Total a pagar: R${total:F2}\n\n" +
-     "COMANDA");
-                    MessageBox.Show("Pagamento realizado com sucesso!");
-                    break;
-                case 3:
-                    MessageBox.Show(
-     $"Cliente: {nome}\n\n" +
-     $"Total a pagar: R${total:F2}\n\n" +
-     "COMANDA");
-                    MessageBox.Show("Pagamento realizado com sucesso!");
-                    break;
-                case 4:
-                    MessageBox.Show(
-     $"Cliente: {nome}\n\n" +
-     $"Total a pagar: R${total:F2}\n\n" +
-     "COMANDA");
-                    MessageBox.Show("Pagamento realizado com sucesso!");
-                    break;
-                case 5:
-                    MessageBox.Show(
-      $"Cliente: {nome}\n\n" +
-      $"Total a pagar: R${total:F2}\n\n" +
-      "COMANDA");
-                    MessageBox.Show("Pagamento realizado com sucesso!");
+                    pagamentoOk = true;
                     break;
                 default:
                     MessageBox.Show("Selecione um método de pagamento válido.", "Erro");
                     return;
             }
-            string nomeProduto = ;
 
+            if (!pagamentoOk)
+                return;
+            // Criação do Pedido
             Pedido pedido = new Pedido()
             {
-                NomeCliebte = nome,
-                NomeProduto = ,
+                NomeCliente = nome,
                 Data = DateTime.Now,
-                Status = StatusPedido.A_Fazer
+                Status = StatusPedido.A_Fazer,
+                Itens = new List<ItemPedido>(),
+                CheckViagem = checkViagem
             };
-            ItemPedido itemPedido;
-            itemPedido = new ItemPedido
-            {
-                NomeProduto = Carrinho.ProductName,
-                Preco = total,
-                Quantidade = 1
-            };
+            List<string> itensParaCozinha = new List<string>();
+            List<string> itensEntregaNaHora = new List<string>();
+            foreach (var itemObj in Carrinho.Items)
+                {
+                    // Exemplo do item: "Coxinha - R$ 5,00 | 2"
+                    string item = itemObj.ToString();
+                    var partes = item.Split('|');
+                    if (partes.Length != 2) continue;
 
-            BancoPedidos.AdicionarPedido(pedido);
+                    var prodPrecoSplit = partes[0].Trim().Split(new[] { " - R$ " }, StringSplitOptions.None);
+                    if (prodPrecoSplit.Length != 2) continue;
+
+                    string nomeProduto = prodPrecoSplit[0].Trim();
+                    double preco = double.Parse(prodPrecoSplit[1].Trim());
+                    int quantidade = int.Parse(partes[1].Trim());
+
+                    var itemPedido = new ItemPedido
+                    {
+                        NomeProduto = nomeProduto,
+                        Preco = preco,
+                        Quantidade = quantidade
+                    };
+                    pedido.Itens.Add(itemPedido);
+                }
+                
+
+            
+            
+                BancoPedidos.AdicionarPedido(pedido);
 
             Carrinho.Items.Clear();
             textBox1.Clear();
@@ -307,5 +319,16 @@ namespace Cantina2._0
         {
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+       
     }
 }

@@ -12,6 +12,7 @@ namespace Cantina2._0.Models
         public int Quantidade { get; set; }
         public double Preco { get; set; }
 
+ 
 
         public override string ToString()
         {
