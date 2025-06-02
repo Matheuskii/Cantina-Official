@@ -35,9 +35,8 @@
             form1BindingSource1 = new BindingSource(components);
             form1BindingSource2 = new BindingSource(components);
             dataGridView1 = new DataGridView();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            btnEmPreparo = new Button();
+            btnEntregue = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource1).BeginInit();
@@ -81,36 +80,27 @@
             dataGridView1.TabIndex = 21;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             // 
-            // button1
+            // btnEmPreparo
             // 
-            button1.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(34, 336);
-            button1.Name = "button1";
-            button1.Size = new Size(93, 23);
-            button1.TabIndex = 22;
-            button1.Text = "A fazer";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnEmPreparo.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEmPreparo.Location = new Point(34, 336);
+            btnEmPreparo.Name = "btnEmPreparo";
+            btnEmPreparo.Size = new Size(93, 23);
+            btnEmPreparo.TabIndex = 22;
+            btnEmPreparo.Text = "A fazer";
+            btnEmPreparo.UseVisualStyleBackColor = true;
+            btnEmPreparo.Click += button1_Click;
             // 
-            // button2
+            // btnEntregue
             // 
-            button2.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(256, 336);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 23;
-            button2.Text = "Entregue";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.Location = new Point(140, 336);
-            button3.Name = "button3";
-            button3.Size = new Size(92, 23);
-            button3.TabIndex = 24;
-            button3.Text = "Em preparo";
-            button3.UseVisualStyleBackColor = true;
+            btnEntregue.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEntregue.Location = new Point(151, 336);
+            btnEntregue.Name = "btnEntregue";
+            btnEntregue.Size = new Size(75, 23);
+            btnEntregue.TabIndex = 23;
+            btnEntregue.Text = "Entregue";
+            btnEntregue.UseVisualStyleBackColor = true;
+            btnEntregue.Click += btnEntregue_Click;
             // 
             // TelaBalcao
             // 
@@ -118,9 +108,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnEntregue);
+            Controls.Add(btnEmPreparo);
             Controls.Add(dataGridView1);
             Controls.Add(pictureBox1);
             Name = "TelaBalcao";
@@ -143,5 +132,7 @@
         private Button button1;
         private Button button2;
         private Button button3;
+        private Button btnEmPreparo;
+        private Button btnEntregue;
     }
 }
