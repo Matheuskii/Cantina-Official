@@ -262,7 +262,7 @@ namespace Cantina2._0
 
             if (!pagamentoOk)
                 return;
-            // Criação do Pedido
+ 
             Pedido pedido = new Pedido()
             {
                 NomeCliente = nome,
@@ -271,41 +271,52 @@ namespace Cantina2._0
                 Itens = new List<ItemPedido>(),
                 CheckViagem = checkViagem
             };
-            List<string> itensParaCozinha = new List<string>();
-            List<string> itensEntregaNaHora = new List<string>();
+
+            
             foreach (var itemObj in Carrinho.Items)
+            {
+                string item = itemObj.ToString();
+                var partes = item.Split('|');
+                if (partes.Length != 2) continue;
+
+                var prodPrecoSplit = partes[0].Trim().Split(new[] { " - R$ " }, StringSplitOptions.None);
+                if (prodPrecoSplit.Length != 2) continue;
+
+                string nomeProduto = prodPrecoSplit[0].Trim();
+                double preco = double.Parse(prodPrecoSplit[1].Trim());
+                int quantidade = int.Parse(partes[1].Trim());
+
+                Produto produtoOriginal = null;
+                foreach (Produto p in ListDisp.Items)
                 {
-                    // Exemplo do item: "Coxinha - R$ 5,00 | 2"
-                    string item = itemObj.ToString();
-                    var partes = item.Split('|');
-                    if (partes.Length != 2) continue;
+                    if (p.Nome == nomeProduto)
+                    {
+                        produtoOriginal = p;
+                        break;
+                    }
+                }
+                if (produtoOriginal == null) continue;
 
-                    var prodPrecoSplit = partes[0].Trim().Split(new[] { " - R$ " }, StringSplitOptions.None);
-                    if (prodPrecoSplit.Length != 2) continue;
-
-                    string nomeProduto = prodPrecoSplit[0].Trim();
-                    double preco = double.Parse(prodPrecoSplit[1].Trim());
-                    int quantidade = int.Parse(partes[1].Trim());
-
-                    var itemPedido = new ItemPedido
+                if (!produtoOriginal.IsChapa)
+                {
+                    pedido.Itens.Add(new ItemPedido
                     {
                         NomeProduto = nomeProduto,
                         Preco = preco,
                         Quantidade = quantidade
-                    };
-                    pedido.Itens.Add(itemPedido);
+                    });
                 }
-                
+            }
 
-            
-            
-                BancoPedidos.AdicionarPedido(pedido);
+            BancoPedidos.AdicionarPedido(pedido);
 
+           
             Carrinho.Items.Clear();
             textBox1.Clear();
             total = 0;
 
             MessageBox.Show($"Pedido do cliente {nome} registrado com sucesso!");
+
             TelaBalcao telaBalcao = new TelaBalcao();
             telaBalcao.Show();
         }

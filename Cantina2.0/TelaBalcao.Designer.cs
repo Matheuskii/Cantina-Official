@@ -35,7 +35,6 @@
             form1BindingSource1 = new BindingSource(components);
             form1BindingSource2 = new BindingSource(components);
             dataGridView1 = new DataGridView();
-            btnEmPreparo = new Button();
             btnEntregue = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).BeginInit();
@@ -80,25 +79,14 @@
             dataGridView1.TabIndex = 21;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             // 
-            // btnEmPreparo
-            // 
-            btnEmPreparo.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnEmPreparo.Location = new Point(34, 336);
-            btnEmPreparo.Name = "btnEmPreparo";
-            btnEmPreparo.Size = new Size(93, 23);
-            btnEmPreparo.TabIndex = 22;
-            btnEmPreparo.Text = "A fazer";
-            btnEmPreparo.UseVisualStyleBackColor = true;
-            btnEmPreparo.Click += button1_Click;
-            // 
             // btnEntregue
             // 
             btnEntregue.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnEntregue.Location = new Point(151, 336);
+            btnEntregue.Location = new Point(40, 324);
             btnEntregue.Name = "btnEntregue";
-            btnEntregue.Size = new Size(75, 23);
+            btnEntregue.Size = new Size(113, 88);
             btnEntregue.TabIndex = 23;
-            btnEntregue.Text = "Entregue";
+            btnEntregue.Text = "Mudar o status";
             btnEntregue.UseVisualStyleBackColor = true;
             btnEntregue.Click += btnEntregue_Click;
             // 
@@ -109,7 +97,6 @@
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
             Controls.Add(btnEntregue);
-            Controls.Add(btnEmPreparo);
             Controls.Add(dataGridView1);
             Controls.Add(pictureBox1);
             Name = "TelaBalcao";
@@ -132,7 +119,6 @@
         private Button button1;
         private Button button2;
         private Button button3;
-        private Button btnEmPreparo;
         private Button btnEntregue;
     }
 }

@@ -16,7 +16,7 @@ namespace Cantina2._0
     public partial class TelaBalcao : Form
     {
 
-
+        private Dictionary<string, StatusPedido> statusPedidos = new Dictionary<string, StatusPedido>();
 
 
         public TelaBalcao()
@@ -29,31 +29,44 @@ namespace Cantina2._0
         }
         private void CarregarPedidos()
         {
-            StatusPedido status = StatusPedido.A_Fazer;
-            StatusPedido status2 = StatusPedido.Em_Preparo;
-            StatusPedido status3 = StatusPedido.Entregue;
-            var pedidosFormatados = BancoDePedidos.BancoPedidos.GetPedidos().Select(p => new
+            var pedidos = BancoDePedidos.BancoPedidos.GetPedidos();
+
+            var pedidosFormatados = pedidos.Select(p => new
             {
                 NomeCliente = p.NomeCliente,
-                //NomeProduto = p.NomeProduto,
                 Data = p.Data.ToString("dd/MM/yyyy HH:mm"),
                 Itens = string.Join(", ", p.Itens.Select(i => $"{i.NomeProduto} ({i.Quantidade})")),
-                Status = status,
+                Status = statusPedidos.ContainsKey(p.NomeCliente)
+                        ? statusPedidos[p.NomeCliente].ToString()
+                        : StatusPedido.A_Fazer.ToString(),
                 checkViagem = p.CheckViagem.Checked,
                 Total = p.Total.ToString("F2")
             }).ToList();
 
             dataGridView1.DataSource = pedidosFormatados;
 
-            // Ajusta os nomes das colunas (opcional)
-            dataGridView1.Columns[0].HeaderText = "NomeCliente";
-            //dataGridView1.Columns[1].HeaderText = "NomeProduto";
+            // Ajuste os headers das colunas
+            dataGridView1.Columns[0].HeaderText = "Nome Cliente";
             dataGridView1.Columns[1].HeaderText = "Data";
             dataGridView1.Columns[2].HeaderText = "Itens";
             dataGridView1.Columns[3].HeaderText = "Status";
-            dataGridView1.Columns[4].HeaderText = "É viagem?";
+            dataGridView1.Columns[4].HeaderText = "É Viagem?";
             dataGridView1.Columns[5].HeaderText = "Total (R$)";
-            
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Agrandir ", 12, FontStyle.Bold);
+            dataGridView1.DefaultCellStyle.Font = new Font("Agrandir", 10, FontStyle.Regular);
+        }
+        private StatusPedido ProximoStatus(StatusPedido atual)
+        {
+            switch (atual)
+            {
+                case StatusPedido.A_Fazer:
+                    return StatusPedido.Em_Preparo;
+                case StatusPedido.Em_Preparo:
+                    return StatusPedido.Entregue;
+                case StatusPedido.Entregue:
+                default:
+                    return StatusPedido.A_Fazer;
+            }
         }
 
 
@@ -90,22 +103,29 @@ namespace Cantina2._0
 
         private void btnEntregue_Click(object sender, EventArgs e)
         {
-            
 
-            
-                StatusPedido statusEntregue = StatusPedido.Entregue;
-            var pedidosFormatados = BancoDePedidos.BancoPedidos.GetPedidos().Select(p => new
+            if (dataGridView1.SelectedRows.Count > 0)
             {
-                NomeCliente = p.NomeCliente,
-                //NomeProduto = p.NomeProduto,
-                Data = p.Data.ToString("dd/MM/yyyy HH:mm"),
-                Itens = string.Join(", ", p.Itens.Select(i => $"{i.NomeProduto} ({i.Quantidade})")),
-                Status = statusEntregue,
-                checkViagem = p.CheckViagem.Checked,
-                Total = p.Total.ToString("F2")
-            }).ToList();
-            dataGridView1.DataSource=pedidosFormatados;
+                var nomeCliente = dataGridView1.SelectedRows[0].Cells["NomeCliente"].Value.ToString();
+
+                if (statusPedidos.ContainsKey(nomeCliente))
+                {
+                    statusPedidos[nomeCliente] = ProximoStatus(statusPedidos[nomeCliente]);
+                }
+                else
+                {
+                    statusPedidos[nomeCliente] = StatusPedido.Em_Preparo;
+                }
+
+                CarregarPedidos();
+            }
+            else
+            {
+                MessageBox.Show("Selecione um pedido para alterar o status.");
+            }
+            
         }
+       
     }
 
 }
