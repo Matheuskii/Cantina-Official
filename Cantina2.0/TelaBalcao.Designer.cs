@@ -72,6 +72,7 @@
             // dataGridView1
             // 
             dataGridView1.AllowUserToOrderColumns = true;
+            dataGridView1.BackgroundColor = Color.FromArgb(243, 241, 238);
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 82);
             dataGridView1.Name = "dataGridView1";
@@ -81,13 +82,14 @@
             // 
             // btnEntregue
             // 
+            btnEntregue.BackColor = Color.FromArgb(243, 241, 238);
             btnEntregue.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEntregue.Location = new Point(40, 324);
             btnEntregue.Name = "btnEntregue";
             btnEntregue.Size = new Size(113, 88);
             btnEntregue.TabIndex = 23;
             btnEntregue.Text = "Mudar o status";
-            btnEntregue.UseVisualStyleBackColor = true;
+            btnEntregue.UseVisualStyleBackColor = false;
             btnEntregue.Click += btnEntregue_Click;
             // 
             // TelaBalcao

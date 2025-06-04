@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Cantina2._0.Models;
-
-namespace Cantina2._0
+﻿namespace Cantina2._0.Models
 {
     internal class Pedido
     {

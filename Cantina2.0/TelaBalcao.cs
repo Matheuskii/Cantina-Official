@@ -36,8 +36,8 @@ namespace Cantina2._0
                 NomeCliente = p.NomeCliente,
                 Data = p.Data.ToString("dd/MM/yyyy HH:mm"),
                 Itens = string.Join(", ", p.Itens.Select(i => $"{i.NomeProduto} ({i.Quantidade})")),
-                Status = statusPedidos.ContainsKey(p.NomeCliente)
-                        ? statusPedidos[p.NomeCliente].ToString()
+                Status = statusPedidos.TryGetValue(p.NomeCliente, out StatusPedido value)
+                        ? value.ToString()
                         : StatusPedido.A_Fazer.ToString(),
                 checkViagem = p.CheckViagem.Checked,
                 Total = p.Total.ToString("F2")
@@ -52,7 +52,7 @@ namespace Cantina2._0
             dataGridView1.Columns[3].HeaderText = "Status";
             dataGridView1.Columns[4].HeaderText = "É Viagem?";
             dataGridView1.Columns[5].HeaderText = "Total (R$)";
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Agrandir ", 12, FontStyle.Bold);
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Agrandir Narrow", 12, FontStyle.Bold);
             dataGridView1.DefaultCellStyle.Font = new Font("Agrandir", 10, FontStyle.Regular);
         }
         private StatusPedido ProximoStatus(StatusPedido atual)
@@ -108,9 +108,9 @@ namespace Cantina2._0
             {
                 var nomeCliente = dataGridView1.SelectedRows[0].Cells["NomeCliente"].Value.ToString();
 
-                if (statusPedidos.ContainsKey(nomeCliente))
+                if (statusPedidos.TryGetValue(nomeCliente, out StatusPedido value))
                 {
-                    statusPedidos[nomeCliente] = ProximoStatus(statusPedidos[nomeCliente]);
+                    statusPedidos[nomeCliente] = ProximoStatus(value);
                 }
                 else
                 {

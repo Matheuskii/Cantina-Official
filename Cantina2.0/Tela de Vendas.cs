@@ -1,6 +1,7 @@
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
+using System.Xml;
 using Cantina2._0.Models;
 using static Cantina2._0.BancoDePedidos;
 
@@ -220,7 +221,8 @@ namespace Cantina2._0
 
                     while (valorPago < total)
                     {
-                        string input = Microsoft.VisualBasic.Interaction.InputBox("Digite o valor pago:", "Pagamento", "0");
+                        string input = Microsoft.VisualBasic.Interaction.InputBox("Digite o valor pago:", "Pagamento", "0")
+                            ;
                         if (double.TryParse(input.Replace(',', '.'), out valorPago))
                         {
                             if (valorPago < total)
@@ -242,11 +244,11 @@ namespace Cantina2._0
                     }
                     break;
                     
-                case 1: // Cartão crédito
-                case 2: // Cartão débito
+                case 1: // Cartão de crédito
+                case 2: // Cartão  dedébito
                 case 3: // PIX
-                case 4: // Vale
-                case 5: // Outro
+                case 4: // Vale Refeição
+                case 5: // Vale Alimentação
                     MessageBox.Show(
                         $"Cliente: {nome}\n\n" +
                         $"Itens:{Carrinho.SelectedItems.ToString}" +
@@ -319,6 +321,8 @@ namespace Cantina2._0
 
             TelaBalcao telaBalcao = new TelaBalcao();
             telaBalcao.Show();
+            Tela_da_cozinha tela_Da_Cozinha = new Tela_da_cozinha();
+            tela_Da_Cozinha.Show();
         }
 
         private void ListDisp_SelectedIndexChanged(object sender, EventArgs e)
@@ -340,6 +344,6 @@ namespace Cantina2._0
         {
 
         }
-       
+        
     }
 }

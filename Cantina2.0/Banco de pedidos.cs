@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Cantina2._0.Models;
-
 namespace Cantina2._0
 {
     internal static class BancoDePedidos
@@ -12,14 +7,15 @@ namespace Cantina2._0
 
         internal static class BancoPedidos
         {
-            private static List<Pedido> pedidos = new List<Pedido>();
+            public static BindingList<Pedido> pedidos = new BindingList<Pedido>();
+            
 
             public static void AdicionarPedido(Pedido pedido)
             {
                 pedidos.Add(pedido);
             }
 
-            public static List<Pedido> GetPedidos()
+            public static BindingList<Pedido> GetPedidos()
             {
                 return pedidos;
             }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Cantina2._0.Models
+﻿namespace Cantina2._0.Models
 {
     public enum StatusPedido
     {
