@@ -265,7 +265,14 @@ namespace Cantina2._0
             if (!pagamentoOk)
                 return;
             List<Pedido> pedidosBalcao = new List<Pedido>();
-            
+            Pedido pedido2 = new Pedido()
+            {
+                NomeCliente = nome,
+                Data = DateTime.Now,
+                Status = StatusPedido.A_Fazer,
+                ItensBalcao = new List<ItemPedido>(),
+                CheckViagem = checkViagem
+            };
             Pedido pedido = new Pedido()
             {
                 NomeCliente = nome,
@@ -298,17 +305,13 @@ namespace Cantina2._0
                         break;
                     }
                 }
-                if (!produtoOriginal.IsChapa && produtoOriginal.IsChapa) ;
+                pedido2.ItensBalcao.Add(new ItemPedido
                 {
-                    pedido.ItensBalcao.Add(new ItemPedido
-                    {
-                        NomeProduto = nomeProduto,
-                        Preco = preco,
-                        Quantidade = quantidade,
-
-                    });
-                   
-                }
+                    NomeProduto = nomeProduto,
+                    Preco = preco,
+                    Quantidade = quantidade,
+                });
+                BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido2);
                 if (produtoOriginal == null) continue;
 
                 if (!produtoOriginal.IsChapa)

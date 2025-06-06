@@ -16,9 +16,6 @@ namespace Cantina2._0
         public Tela_da_cozinha()
         {
             InitializeComponent();
-
-            BancoDePedidos.BancoPedidos.GetPedidosProBalcao();
-            itemPedidoBindingSource.ToString();
             dataGridView1.DataSource = BancoDePedidos.BancoPedidos.GetPedidosProBalcao();
 
 
