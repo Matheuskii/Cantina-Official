@@ -17,11 +17,22 @@ namespace Cantina2._0
         {
             InitializeComponent();
 
+            BancoDePedidos.BancoPedidos.GetPedidosProBalcao();
+            itemPedidoBindingSource.ToString();
+            dataGridView1.DataSource = BancoDePedidos.BancoPedidos.GetPedidosProBalcao();
 
-            dataGridView1.DataSource = BancoDePedidos.BancoPedidos.GetPedidos();
 
-            
+
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Tela_da_cozinha_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

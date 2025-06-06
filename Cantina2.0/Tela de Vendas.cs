@@ -149,7 +149,7 @@ namespace Cantina2._0
                 if (quantidadeAtual > quantidadeRemover)
                 {
                     quantidadeAtual -= quantidadeRemover;
-                    Carrinho.Items[index] = $"{parteProduto} | {quantidadeAtual}";
+                    Carrinho.Items[index] = $"{parteProduto} |  {quantidadeAtual}";
                     Carrinho.ClearSelected();
                 }
                 else
@@ -264,16 +264,17 @@ namespace Cantina2._0
 
             if (!pagamentoOk)
                 return;
- 
+            List<Pedido> pedidosBalcao = new List<Pedido>();
+            
             Pedido pedido = new Pedido()
             {
                 NomeCliente = nome,
                 Data = DateTime.Now,
                 Status = StatusPedido.A_Fazer,
-                Itens = new List<ItemPedido>(),
+                ItensCozinha = new List<ItemPedido>(),
                 CheckViagem = checkViagem
             };
-
+          
             
             foreach (var itemObj in Carrinho.Items)
             {
@@ -297,21 +298,33 @@ namespace Cantina2._0
                         break;
                     }
                 }
+                if (!produtoOriginal.IsChapa && produtoOriginal.IsChapa) ;
+                {
+                    pedido.ItensBalcao.Add(new ItemPedido
+                    {
+                        NomeProduto = nomeProduto,
+                        Preco = preco,
+                        Quantidade = quantidade,
+
+                    });
+                   
+                }
                 if (produtoOriginal == null) continue;
 
                 if (!produtoOriginal.IsChapa)
                 {
-                    pedido.Itens.Add(new ItemPedido
+                    pedido.ItensCozinha.Add(new ItemPedido
                     {
                         NomeProduto = nomeProduto,
                         Preco = preco,
                         Quantidade = quantidade
                     });
+                    BancoPedidos.AdicionarPedidoBalcao(pedido);
+                   
                 }
             }
 
             BancoPedidos.AdicionarPedido(pedido);
-
            
             Carrinho.Items.Clear();
             textBox1.Clear();

@@ -35,7 +35,7 @@ namespace Cantina2._0
             {
                 NomeCliente = p.NomeCliente,
                 Data = p.Data.ToString("dd/MM/yyyy HH:mm"),
-                Itens = string.Join(", ", p.Itens.Select(i => $"{i.NomeProduto} ({i.Quantidade})")),
+                Itens = string.Join(", ", p.ItensCozinha.Select(i => $"{i.NomeProduto} ({i.Quantidade})")),
                 Status = statusPedidos.TryGetValue(p.NomeCliente, out StatusPedido value)
                         ? value.ToString()
                         : StatusPedido.A_Fazer.ToString(),

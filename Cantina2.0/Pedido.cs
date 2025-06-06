@@ -5,10 +5,11 @@
         public string NomeCliente { get; set; }
             public string NomeProduto { get; set; }
             public DateTime Data { get; set; }
-            public List<ItemPedido> Itens { get; set; } = new List<ItemPedido>();
-            public StatusPedido Status { get; set; } = StatusPedido.A_Fazer;
+            public List<ItemPedido> ItensCozinha { get; set; } = new List<ItemPedido>();
+        public List<ItemPedido> ItensBalcao { get; set; } = new List<ItemPedido>();
+        public StatusPedido Status { get; set; } = StatusPedido.A_Fazer;
 
-            public double Total => Itens.Sum(i => i.Preco * i.Quantidade);
+            public double Total => ItensCozinha.Sum(i => i.Preco * i.Quantidade);
             public CheckBox CheckViagem { get; set; }
        
 

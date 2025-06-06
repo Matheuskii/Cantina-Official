@@ -39,10 +39,11 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.Location = new Point(123, 64);
+            dataGridView1.Location = new Point(114, 56);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(645, 250);
             dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // itemPedidoBindingSource
             // 
@@ -64,6 +65,7 @@
             ForeColor = Color.FromArgb(120, 118, 100);
             Name = "Tela_da_cozinha";
             Text = "Tela_da_cozinha";
+            Load += Tela_da_cozinha_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemPedidoBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).EndInit();
