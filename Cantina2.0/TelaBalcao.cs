@@ -50,6 +50,12 @@ namespace Cantina2._0
             dataGridView1.Columns[2].HeaderText = "Itens";
             dataGridView1.Columns[3].HeaderText = "Status";
             dataGridView1.Columns[4].HeaderText = "É Viagem?";
+            dataGridView1.Columns[0].Width = 150;
+            dataGridView1.Columns[1].Width = 150;
+            dataGridView1.Columns[2].Width = 250;
+            dataGridView1.Columns[3].Width = 100;
+            dataGridView1.Columns[4].Width = 100;
+            
           
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Agrandir Narrow", 12, FontStyle.Bold);
             dataGridView1.DefaultCellStyle.Font = new Font("Agrandir", 10, FontStyle.Regular);
@@ -67,6 +73,29 @@ namespace Cantina2._0
                     return StatusPedido.A_Fazer;
             }
         }
+        private void RetirarItemConcluido(string nomeCliente)
+        {
+            if (statusPedidos.ContainsKey(nomeCliente))
+            {
+                statusPedidos.Remove(nomeCliente);
+            }
+        }
+        private void btnRetirar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var nomeCliente = dataGridView1.SelectedRows[0].Cells["NomeCliente"].Value.ToString();
+                RetirarItemConcluido(nomeCliente);
+                CarregarPedidos();
+            }
+            else
+            {
+                MessageBox.Show("Selecione um pedido para retirar.");
+            }
+        }
+
+
+
 
 
 
