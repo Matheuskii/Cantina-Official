@@ -37,10 +37,9 @@ namespace Cantina2._0
                 Data = p.Data.ToString("dd/MM/yyyy HH:mm"),
                 Itens = string.Join(", ", p.ItensCozinha.Select(i => $"{i.NomeProduto} ({i.Quantidade})")),
                 Status = statusPedidos.TryGetValue(p.NomeCliente, out StatusPedido value)
-                        ? value.ToString()
-                        : StatusPedido.A_Fazer.ToString(),
+                ? value.ToString()
+                : StatusPedido.A_Fazer.ToString(),
                 checkViagem = p.CheckViagem.Checked,
-                Total = p.Total.ToString("F2")
             }).ToList();
 
             dataGridView1.DataSource = pedidosFormatados;
@@ -51,7 +50,7 @@ namespace Cantina2._0
             dataGridView1.Columns[2].HeaderText = "Itens";
             dataGridView1.Columns[3].HeaderText = "Status";
             dataGridView1.Columns[4].HeaderText = "É Viagem?";
-            dataGridView1.Columns[5].HeaderText = "Total (R$)";
+          
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Agrandir Narrow", 12, FontStyle.Bold);
             dataGridView1.DefaultCellStyle.Font = new Font("Agrandir", 10, FontStyle.Regular);
         }

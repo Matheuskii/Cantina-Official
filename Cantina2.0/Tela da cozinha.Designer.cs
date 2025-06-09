@@ -32,6 +32,8 @@
             dataGridView1 = new DataGridView();
             itemPedidoBindingSource = new BindingSource(components);
             form1BindingSource = new BindingSource(components);
+            listBox1 = new ListBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemPedidoBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).BeginInit();
@@ -39,10 +41,11 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.Location = new Point(114, 56);
+            dataGridView1.Location = new Point(12, 95);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(645, 250);
+            dataGridView1.Size = new Size(645, 282);
             dataGridView1.TabIndex = 0;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // itemPedidoBindingSource
@@ -53,6 +56,25 @@
             // 
             form1BindingSource.DataSource = typeof(Form1);
             // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.Location = new Point(693, 95);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(188, 276);
+            listBox1.TabIndex = 1;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(12, 383);
+            button1.Name = "button1";
+            button1.Size = new Size(286, 76);
+            button1.TabIndex = 2;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Tela_da_cozinha
             // 
             AutoScaleDimensions = new SizeF(8F, 16F);
@@ -60,6 +82,8 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(120, 118, 100);
             ClientSize = new Size(914, 480);
+            Controls.Add(button1);
+            Controls.Add(listBox1);
             Controls.Add(dataGridView1);
             Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 186);
             ForeColor = Color.FromArgb(120, 118, 100);
@@ -80,5 +104,7 @@
         private DataGridViewTextBoxColumn nomeProdutoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn quantidadeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn precoDataGridViewTextBoxColumn;
+        private ListBox listBox1;
+        private Button button1;
     }
 }

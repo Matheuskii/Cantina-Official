@@ -36,6 +36,8 @@
             form1BindingSource2 = new BindingSource(components);
             dataGridView1 = new DataGridView();
             btnEntregue = new Button();
+            label5 = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource1).BeginInit();
@@ -92,12 +94,34 @@
             btnEntregue.UseVisualStyleBackColor = false;
             btnEntregue.Click += btnEntregue_Click;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Agrandir Semi Narrow", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(274, 24);
+            label5.Name = "label5";
+            label5.Size = new Size(122, 39);
+            label5.TabIndex = 25;
+            label5.Text = "Cozinha";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Agrandir Semi Narrow", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(231, 24);
+            label1.Name = "label1";
+            label1.Size = new Size(37, 39);
+            label1.TabIndex = 24;
+            label1.Text = "X";
+            // 
             // TelaBalcao
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
+            Controls.Add(label5);
+            Controls.Add(label1);
             Controls.Add(btnEntregue);
             Controls.Add(dataGridView1);
             Controls.Add(pictureBox1);
@@ -110,6 +134,7 @@
             ((System.ComponentModel.ISupportInitialize)form1BindingSource2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -122,5 +147,7 @@
         private Button button2;
         private Button button3;
         private Button btnEntregue;
+        private Label label5;
+        private Label label1;
     }
 }
