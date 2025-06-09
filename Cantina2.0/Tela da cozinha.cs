@@ -43,6 +43,7 @@ namespace Cantina2._0
                 Total = p.ItensBalcao.Sum(i => i.Preco * i.Quantidade).ToString("F2")
             }).ToList();
 
+            
             dataGridView1.DataSource = pedidosFormatados;
 
             // Ajuste os headers das colunas
@@ -76,18 +77,13 @@ namespace Cantina2._0
         {
           
         }
-
+        
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                // Limpa a listBox antes de adicionar novos itens
                 listBox1.Items.Clear();
-
-                // Obtém o nome do cliente da linha selecionada
                 var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells["NomeCliente"].Value.ToString();
-
-                // Busca o pedido correspondente no banco
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
                     .FirstOrDefault(p => p.NomeCliente == nomeCliente);
 
@@ -106,7 +102,8 @@ namespace Cantina2._0
 
         }
 
-
+        
+        
         private void button1_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
