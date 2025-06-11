@@ -13,17 +13,17 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace Cantina2._0
 {
 
-    public partial class TelaBalcao : Form
+    public partial class TelaCozinha : Form
     {
 
-        private Dictionary<string, StatusPedido> statusPedidos = new Dictionary<string, StatusPedido>();
 
-
-        public TelaBalcao()
+        public TelaCozinha()
         {
 
             InitializeComponent();
-
+            dataGridView1.SelectionMode  = DataGridViewSelectionMode.FullRowSelect;
+            pictureBox1.TabStop = false;
+            
             CarregarPedidos();
 
         }
@@ -36,20 +36,19 @@ namespace Cantina2._0
                 NomeCliente = p.NomeCliente,
                 Data = p.Data.ToString("dd/MM/yyyy HH:mm"),
                 Itens = string.Join(", ", p.ItensCozinha.Select(i => $"{i.NomeProduto} ({i.Quantidade})")),
-                Status = statusPedidos.TryGetValue(p.NomeCliente, out StatusPedido value)
-                ? value.ToString()
-                : StatusPedido.A_Fazer.ToString(),
+                Status = p.Status.ToString(),
                 checkViagem = p.CheckViagem.Checked,
             }).ToList();
 
             dataGridView1.DataSource = pedidosFormatados;
 
             // Ajuste os headers das colunas
-            dataGridView1.Columns[0].HeaderText = "Nome Cliente";
-            dataGridView1.Columns[1].HeaderText = "Data";
-            dataGridView1.Columns[2].HeaderText = "Itens";
-            dataGridView1.Columns[3].HeaderText = "Status";
-            dataGridView1.Columns[4].HeaderText = "É Viagem?";
+            dataGridView1.Columns[0].HeaderText = "NOME DO CLIENTE";
+            dataGridView1.Columns[1].HeaderText = "DATA/HORA";
+            dataGridView1.Columns[2].HeaderText = "ITENS";
+            dataGridView1.Columns[3].HeaderText = "STATUS";
+            dataGridView1.Columns[4].HeaderText = "VIAGEM";
+            dataGridView1.Columns[4].Visible = false; // Oculta a coluna de viagem, se necessário
             dataGridView1.Columns[0].Width = 150;
             dataGridView1.Columns[1].Width = 150;
             dataGridView1.Columns[2].Width = 250;
@@ -73,62 +72,51 @@ namespace Cantina2._0
                     return StatusPedido.A_Fazer;
             }
         }
-        private void RetirarItemConcluido(string nomeCliente)
+        private void Tela_da_cozinha_Activated(object sender, EventArgs e)
         {
-            if (statusPedidos.ContainsKey(nomeCliente))
-            {
-                statusPedidos.Remove(nomeCliente);
-            }
+            CarregarPedidos();
         }
         private void btnRetirar_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 var nomeCliente = dataGridView1.SelectedRows[0].Cells["NomeCliente"].Value.ToString();
-                RetirarItemConcluido(nomeCliente);
-                CarregarPedidos();
+                var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells["Data"].Value.ToString());
+                // Busca o pedido correspondente
+                var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
+                    .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
+
+                if (pedido != null)
+                {
+                    // Muda o status para Pronto
+                    pedido.Status = StatusPedido.Pronto;
+
+                    // Remove da cozinha
+                    BancoDePedidos.BancoPedidos.pedidosPraCozinha.Remove(pedido);
+
+                    // Adiciona ao balcão
+                    BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido);
+
+                    CarregarPedidos();
+                }
             }
             else
             {
                 MessageBox.Show("Selecione um pedido para retirar.");
             }
         }
-
-
-
-
-
-
-
-
-
-
         private void Form2_Load(object sender, EventArgs e)
         {
 
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+       
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        // Botão para avançar o status do pedido selecionado no balcão.
         private void btnEntregue_Click(object sender, EventArgs e)
         {
 
@@ -136,22 +124,21 @@ namespace Cantina2._0
             {
                 var nomeCliente = dataGridView1.SelectedRows[0].Cells["NomeCliente"].Value.ToString();
 
-                if (statusPedidos.TryGetValue(nomeCliente, out StatusPedido value))
-                {
-                    statusPedidos[nomeCliente] = ProximoStatus(value);
-                }
-                else
-                {
-                    statusPedidos[nomeCliente] = StatusPedido.Em_Preparo;
-                }
+                var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells["Data"].Value.ToString());
 
-                CarregarPedidos();
+                var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
+                .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
+
+                if (pedido != null)
+                {
+                    pedido.Status = ProximoStatus(pedido.Status);
+                    CarregarPedidos();
+                }
             }
             else
             {
                 MessageBox.Show("Selecione um pedido para alterar o status.");
             }
-
         }
 
         private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)

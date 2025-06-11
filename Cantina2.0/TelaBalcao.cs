@@ -13,15 +13,15 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Cantina2._0
 {
-    public partial class Tela_da_cozinha : Form
+    public partial class Tela_do_balcao : Form
     {
-        private Dictionary<string, StatusPedido> statusPedidos2;
+        private Dictionary<string, StatusPedido> statusPedidos;
 
 
-        public Tela_da_cozinha()
+        public Tela_do_balcao()
         {
             InitializeComponent();
-            statusPedidos2 = new Dictionary<string, StatusPedido>();
+            statusPedidos = new Dictionary<string, StatusPedido>();
             pictureBox1.TabStop = false;
 
             CarregarPedidos();
@@ -37,9 +37,7 @@ namespace Cantina2._0
                 NomeCliente = p.NomeCliente,
                 Data = p.Data.ToString("dd/MM/yyyy HH:mm"),
                 Itens = string.Join(", ", p.ItensBalcao.Select(i => $"{i.NomeProduto} ({i.Quantidade})")),
-                Status = statusPedidos2.TryGetValue(p.NomeCliente, out StatusPedido value)
-                        ? value.ToString()
-                        : StatusPedido.A_Fazer.ToString(),
+                Status = p.Status.ToString(),
                 checkViagem = p.CheckViagem.Checked,
                 Total = p.ItensBalcao.Sum(i => i.Preco * i.Quantidade).ToString("F2")
             }).ToList();
@@ -48,21 +46,12 @@ namespace Cantina2._0
             dataGridView1.DataSource = pedidosFormatados;
 
 
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.FromArgb(240, 240, 240);
+            
 
          
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Agrandir Narrow", 12, FontStyle.Bold);
           
-            // Estilo para células
             dataGridView1.DefaultCellStyle.Font = new Font("Agrandir", 11, FontStyle.Regular);
-           
-
-            // Estilo para linhas alternadas
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(120, 118, 100);
-
-            // Configuração das colunas
             dataGridView1.Columns[0].HeaderText = "CLIENTE";
             dataGridView1.Columns[1].HeaderText = "DATA/HORA";
             dataGridView1.Columns[2].HeaderText = "ITENS";
@@ -108,25 +97,21 @@ namespace Cantina2._0
                 {
                     listBox1.Items.Clear();
 
-                    // PEGA O NOME DO CLIENTE DA LINHA CLICADA (não da selecionada)
-                    var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells["NomeCliente"].Value?.ToString();
+                    var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells["NomeCliente"].Value.ToString();
+                    var data = DateTime.Parse(dataGridView1.Rows[e.RowIndex].Cells["Data"].Value.ToString());
 
-                    if (!string.IsNullOrEmpty(nomeCliente))
+                    var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
+                        .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
+
+                    if (pedido != null && pedido.ItensBalcao != null)
                     {
-                        var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
-                            .FirstOrDefault(p => p.NomeCliente == nomeCliente);
-
-                        if (pedido != null && pedido.ItensBalcao != null)
+                        foreach (var item in pedido.ItensBalcao)
                         {
-                            foreach (var item in pedido.ItensBalcao)
-                            {
-                                listBox1.Items.Add($"{item.NomeProduto} - x{item.Quantidade} - R$ {item.Preco:F2}");
-                            }
-
-                            // SELECIONA A LINHA CLICADA (para o button1 funcionar)
-                            dataGridView1.ClearSelection();
-                            dataGridView1.Rows[e.RowIndex].Selected = true;
+                            listBox1.Items.Add($"{item.NomeProduto} - x{item.Quantidade} - R$ {item.Preco:F2}");
                         }
+
+                        dataGridView1.ClearSelection();
+                        dataGridView1.Rows[e.RowIndex].Selected = true;
                     }
                 }
                 catch (Exception ex)
@@ -134,7 +119,6 @@ namespace Cantina2._0
                     MessageBox.Show($"Erro ao carregar itens: {ex.Message}");
                 }
             }
-
         }
 
 
@@ -145,7 +129,11 @@ namespace Cantina2._0
         }
 
 
-
+        // Botão para avançar o status do pedido selecionado no balcão.
+        // Ao clicar, busca o pedido pelo nome do cliente e data/hora,
+        // avança o status (A_Fazer -> Em_Preparo -> Pronto -> Entregue),
+        // e se chegar em "Entregue", chama AtualizarStatusNoBalcao().
+        // Depois, atualiza a lista de pedidos exibidos.
         private void button1_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)

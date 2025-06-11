@@ -1,6 +1,6 @@
 ﻿namespace Cantina2._0
 {
-    partial class TelaBalcao
+    partial class TelaCozinha
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaBalcao));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaCozinha));
             pictureBox1 = new PictureBox();
             form1BindingSource = new BindingSource(components);
             form1BindingSource1 = new BindingSource(components);

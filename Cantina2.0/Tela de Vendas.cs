@@ -17,15 +17,15 @@ namespace Cantina2._0
             boxRemove.Minimum = 1;
             boxQuantity.Minimum = 1;
 
-            ListDisp.Items.Add(new Produto("Pão de Queijo", 3.50, true));
+            ListDisp.Items.Add(new Produto("Pï¿½o de Queijo", 3.50, true));
             ListDisp.Items.Add(new Produto("Coxinha", 5.00, true));
             ListDisp.Items.Add(new Produto("Pastel de Carne", 6.00, false));
             ListDisp.Items.Add(new Produto("Pastel de Queijo", 5.50, false));
             ListDisp.Items.Add(new Produto("Refrigerante Lata", 4.50, true));
             ListDisp.Items.Add(new Produto("Hamburguer Simples", 8.00, false));
-            ListDisp.Items.Add(new Produto("Hambúrguer com Queijo", 9.00, false));
+            ListDisp.Items.Add(new Produto("Hambï¿½rguer com Queijo", 9.00, false));
             ListDisp.Items.Add(new Produto("X-Tudo", 12.00, false));
-            ListDisp.Items.Add(new Produto("Água Mineral(500ml)", 4.00, true));
+            ListDisp.Items.Add(new Produto("ï¿½gua Mineral(500ml)", 4.00, true));
 
         }
 
@@ -187,7 +187,7 @@ namespace Cantina2._0
             }
             if (Carrinho.Items.Count == 0)
             {
-                MessageBox.Show("O carrinho está vazio. Adicione itens antes de finalizar o pedido.", "Erro");
+                MessageBox.Show("O carrinho estï¿½ vazio. Adicione itens antes de finalizar o pedido.", "Erro");
                 return;
             }
             if (total == 0)
@@ -218,7 +218,7 @@ namespace Cantina2._0
                     $"Total a pagar: R${total:F2}\n\n" +
                     $"Extrato:{resumo}" +
                     "COMANDA");
-                    MessageBox.Show("Qual quantidade o cliente irá pagar?", "Pagamento");
+                    MessageBox.Show("Qual quantidade o cliente irï¿½ pagar?", "Pagamento");
 
                     while (valorPago < total)
                     {
@@ -240,16 +240,16 @@ namespace Cantina2._0
                         }
                         else
                         {
-                            MessageBox.Show("Valor inválido. Tente novamente.");
+                            MessageBox.Show("Valor invï¿½lido. Tente novamente.");
                         }
                     }
                     break;
 
-                case 1: // Cartão de crédito
-                case 2: // Cartão  dedébito
+                case 1: // Cartï¿½o de crï¿½dito
+                case 2: // Cartï¿½o  dedï¿½bito
                 case 3: // PIX
-                case 4: // Vale Refeição
-                case 5: // Vale Alimentação
+                case 4: // Vale Refeiï¿½ï¿½o
+                case 5: // Vale Alimentaï¿½ï¿½o
                     MessageBox.Show(
                         $"Cliente: {nome}\n\n" +
                         $"Itens:{Carrinho.SelectedItems.ToString}" +
@@ -259,7 +259,7 @@ namespace Cantina2._0
                     pagamentoOk = true;
                     break;
                 default:
-                    MessageBox.Show("Selecione um método de pagamento válido.", "Erro");
+                    MessageBox.Show("Selecione um mï¿½todo de pagamento vï¿½lido.", "Erro");
                     return;
             }
 
@@ -344,9 +344,9 @@ namespace Cantina2._0
 
             MessageBox.Show($"Pedido do cliente {nome} registrado com sucesso!");
 
-            TelaBalcao telaBalcao = new TelaBalcao();
+            TelaCozinha telaBalcao = new TelaCozinha();
             telaBalcao.Show();
-            Tela_da_cozinha tela_Da_Cozinha = new Tela_da_cozinha();
+            Tela_do_balcao tela_Da_Cozinha = new Tela_do_balcao();
             tela_Da_Cozinha.Show();
         }
 
