@@ -4,6 +4,7 @@
     {
         A_Fazer,
         Em_Preparo,
-        Entregue
+        Entregue,
+        Pronto
     }
 }

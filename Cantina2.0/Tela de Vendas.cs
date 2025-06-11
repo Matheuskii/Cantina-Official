@@ -12,10 +12,12 @@ namespace Cantina2._0
         public Form1()
         {
             InitializeComponent();
+            pictureBox1.TabStop = false;
+
             boxRemove.Minimum = 1;
             boxQuantity.Minimum = 1;
 
-            ListDisp.Items.Add(new Produto("Pão de Queijo", 3.50,true));
+            ListDisp.Items.Add(new Produto("Pão de Queijo", 3.50, true));
             ListDisp.Items.Add(new Produto("Coxinha", 5.00, true));
             ListDisp.Items.Add(new Produto("Pastel de Carne", 6.00, false));
             ListDisp.Items.Add(new Produto("Pastel de Queijo", 5.50, false));
@@ -64,10 +66,10 @@ namespace Cantina2._0
             }
             if (!itemExistente)
             {
-               
+
                 Carrinho.Items.Add($"{produtoSelecionado} | {QuantidadeSelecionada}");
             }
-            
+
             total += produtoSelecionado.Preco * QuantidadeSelecionada;
             ListDisp.ClearSelected();
             boxQuantity.Value = 1;
@@ -200,13 +202,13 @@ namespace Cantina2._0
             double troco = 0;
             bool pagamentoOk = false;
             List<string> resumo = new();
-            foreach (ItemPedido itemExt in Carrinho.SelectedItems) 
+            foreach (ItemPedido itemExt in Carrinho.SelectedItems)
             {
                 resumo.Add(itemExt.NomeProduto);
-               
+
             }
             //Lista para a entrega de cozinha
-            
+
             switch (metodoPagamento)
             {
                 case 0: // Dinheiro
@@ -242,7 +244,7 @@ namespace Cantina2._0
                         }
                     }
                     break;
-                    
+
                 case 1: // Cartão de crédito
                 case 2: // Cartão  dedébito
                 case 3: // PIX
@@ -280,9 +282,9 @@ namespace Cantina2._0
                 ItensCozinha = new List<ItemPedido>(),
                 CheckViagem = checkViagem,
             };
-               
-          
-            
+
+
+
             foreach (var itemObj in Carrinho.Items)
             {
                 string item = itemObj.ToString();
@@ -314,7 +316,7 @@ namespace Cantina2._0
                     Preco = preco,
                     Quantidade = quantidade,
                 });
-                
+
 
 
 
@@ -329,13 +331,13 @@ namespace Cantina2._0
                         Preco = preco,
                         Quantidade = quantidade
                     });
-                    
-                   
+
+
                 }
             }
             BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido2);
             BancoPedidos.AdicionarPedido(pedido);
-           
+
             Carrinho.Items.Clear();
             textBox1.Clear();
             total = 0;
@@ -367,6 +369,10 @@ namespace Cantina2._0
         {
 
         }
-        
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

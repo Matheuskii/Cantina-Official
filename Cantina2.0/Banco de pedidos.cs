@@ -33,23 +33,26 @@ internal static class BancoDePedidos
             }
             public static void AtualizarStatusNoBalcao()
             {
-                foreach (var pedido in pedidosPraCozinha)
+                // Obter apenas pedidos marcados como Entregue
+                var pedidosEntregues = pedidosPraCozinha
+                    .Where(p => p.Status == StatusPedido.Entregue)
+                    .ToList();
+
+                foreach (var pedido in pedidosEntregues)
                 {
-                    if (pedido.Status == StatusPedido.Pronto)
+                    var pedidoExistente = pedidosProBalcao.FirstOrDefault(p => p.NomeCliente == pedido.NomeCliente);
+
+                    if (pedidoExistente == null)
                     {
-                        // Verifica se o pedido já existe no balcão
-                        var pedidoExistente = pedidosProBalcao.FirstOrDefault(p => p.NomeCliente == pedido.NomeCliente);
-                        if (pedidoExistente == null)
-                        {
-                            // Se não existir, adiciona o pedido ao balcão
-                            pedidosProBalcao.Add(pedido);
-                        }
-                        else
-                        {
-                            // Se existir, atualiza o status
-                            pedidoExistente.Status = StatusPedido.Pronto;
-                        }
+                        pedidosProBalcao.Add(pedido);
                     }
+                    else
+                    {
+                      
+                        pedidosProBalcao.Remove(pedidoExistente);
+                        pedidosProBalcao.Add(pedido);
+                    }
+                    pedidosPraCozinha.Remove(pedido);
                 }
             }
         }
