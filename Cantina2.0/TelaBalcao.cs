@@ -25,7 +25,7 @@ namespace Cantina2._0
             pictureBox1.TabStop = false;
 
             CarregarPedidos();
-            
+
 
         }
         private void CarregarPedidos()
@@ -42,15 +42,15 @@ namespace Cantina2._0
                 Total = p.ItensBalcao.Sum(i => i.Preco * i.Quantidade).ToString("F2")
             }).ToList();
 
-            
+
             dataGridView1.DataSource = pedidosFormatados;
 
 
-            
 
-         
+
+
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Agrandir Narrow", 12, FontStyle.Bold);
-          
+
             dataGridView1.DefaultCellStyle.Font = new Font("Agrandir", 11, FontStyle.Regular);
             dataGridView1.Columns[0].HeaderText = "CLIENTE";
             dataGridView1.Columns[1].HeaderText = "DATA/HORA";
@@ -65,7 +65,7 @@ namespace Cantina2._0
             dataGridView1.Columns[4].Width = 100;
             dataGridView1.Columns[5].Width = 100;
         }
-        
+
 
         private StatusPedido ProximoStatus(StatusPedido atual)
         {
@@ -77,95 +77,99 @@ namespace Cantina2._0
                 default: return StatusPedido.A_Fazer;
             }
         }
-        
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-          
+
 
         }
 
         private void Tela_da_cozinha_Load(object sender, EventArgs e)
         {
-            
+
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DisplayCustomerOrderDetails(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
+            if (e.RowIndex >= 0)
             {
-                try
-                {
-                    listBox1.Items.Clear();
 
-                    var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells["NomeCliente"].Value.ToString();
-                    var data = DateTime.Parse(dataGridView1.Rows[e.RowIndex].Cells["Data"].Value.ToString());
+                listBox1.Items.Clear();
 
-                    var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
-                        .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
-
-                    if (pedido != null && pedido.ItensBalcao != null)
-                    {
-                        foreach (var item in pedido.ItensBalcao)
-                        {
-                            listBox1.Items.Add($"{item.NomeProduto} - x{item.Quantidade} - R$ {item.Preco:F2}");
-                        }
-
-                        dataGridView1.ClearSelection();
-                        dataGridView1.Rows[e.RowIndex].Selected = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Erro ao carregar itens: {ex.Message}");
-                }
-            }
-        }
-
-
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        // Botão para avançar o status do pedido selecionado no balcão.
-        // Ao clicar, busca o pedido pelo nome do cliente e data/hora,
-        // avança o status (A_Fazer -> Em_Preparo -> Pronto -> Entregue),
-        // e se chegar em "Entregue", chama AtualizarStatusNoBalcao().
-        // Depois, atualiza a lista de pedidos exibidos.
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                var nomeCliente = dataGridView1.SelectedRows[0].Cells["NomeCliente"].Value.ToString();
-                var data = dataGridView1.SelectedRows[0].Cells["Data"].Value.GetType() == typeof(string)
-                    ? DateTime.Parse(dataGridView1.SelectedRows[0].Cells["Data"].Value.ToString())
-                    : (DateTime)dataGridView1.SelectedRows[0].Cells["Data"].Value;
+                var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells["CLIENTE"].Value.ToString();
 
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
-                    .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
+                    .FirstOrDefault(p => p.NomeCliente == nomeCliente);
 
-                if (pedido != null)
+                if (pedido != null && pedido.ItensBalcao != null)
                 {
-                   
-                    var novoStatus = ProximoStatus(pedido.Status);
-
-                    
-                    pedido.Status = novoStatus;
-
-                    if (novoStatus == StatusPedido.Entregue)
+                    foreach (var item in pedido.ItensBalcao)
                     {
-                        BancoDePedidos.BancoPedidos.AtualizarStatusNoBalcao();
-                    }                  
-                    CarregarPedidos();
+                        listBox1.Items.Add($"{item.NomeProduto} - x{item.Quantidade} - R$ {item.Preco:F2}");
+                    }
+
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[e.RowIndex].Selected = true;
                 }
+
             }
-            else
+        }
+
+        private void UpdateOrderStatus_Click(object sender, EventArgs e)
+        {
+
+            if (dataGridView1.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Selecione um pedido para alterar o status.");
+                return;
             }
+
+            var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            var dataStr = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            var data = DateTime.ParseExact(dataStr, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+
+            var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
+                .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
+
+            if (pedido == null)
+            {
+                MessageBox.Show("Pedido não encontrado.");
+                return;
+            }
+
+            pedido.Status = ProximoStatus(pedido.Status);
+
+            if (pedido.Status == StatusPedido.Entregue)
+
+
+                CarregarPedidos();
+
+        }
+        private void btnRetirar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecione um pedido para retirar.");
+                return;
+            }
+
+            var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            var dataStr = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            var data = DateTime.ParseExact(dataStr, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+
+            var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
+                .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
+
+            if (pedido == null)
+            {
+                MessageBox.Show("Pedido não encontrado.");
+                return;
+            }
+
+            BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
+            CarregarPedidos();
         }
     }
 }
+
 

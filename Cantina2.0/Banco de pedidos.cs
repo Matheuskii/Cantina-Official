@@ -31,33 +31,11 @@ internal static class BancoDePedidos
             {
                 return pedidosProBalcao;
             }
-            public static void AtualizarStatusNoBalcao()
-            {
-                // Obter apenas pedidos marcados como Entregue
-                var pedidosEntregues = pedidosPraCozinha
-                    .Where(p => p.Status == StatusPedido.Entregue)
-                    .ToList();
-
-                foreach (var pedido in pedidosEntregues)
-                {
-                    var pedidoExistente = pedidosProBalcao.FirstOrDefault(p => p.NomeCliente == pedido.NomeCliente);
-
-                    if (pedidoExistente == null)
-                    {
-                        pedidosProBalcao.Add(pedido);
-                    }
-                    else
-                    {
-                      
-                        pedidosProBalcao.Remove(pedidoExistente);
-                        pedidosProBalcao.Add(pedido);
-                    }
-                    pedidosPraCozinha.Remove(pedido);
-                }
+            
             }
         }
     }
 
-}
+
 
 

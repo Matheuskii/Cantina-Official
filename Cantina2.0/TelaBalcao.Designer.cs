@@ -50,7 +50,7 @@ namespace Cantina2._0
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(645, 282);
             dataGridView1.TabIndex = 0;
-            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellClick += DisplayCustomerOrderDetails;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // itemPedidoBindingSource
@@ -68,7 +68,7 @@ namespace Cantina2._0
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(188, 276);
             listBox1.TabIndex = 1;
-            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            
             // 
             // button1
             // 
@@ -78,7 +78,7 @@ namespace Cantina2._0
             button1.TabIndex = 2;
             button1.Text = "Change status";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += UpdateOrderStatus_Click;
             // 
             // pictureBox1
             // 

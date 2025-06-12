@@ -80,21 +80,20 @@ namespace Cantina2._0
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                var nomeCliente = dataGridView1.SelectedRows[0].Cells["NomeCliente"].Value.ToString();
-                var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells["Data"].Value.ToString());
-                // Busca o pedido correspondente
+                var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString());
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
                     .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
 
                 if (pedido != null)
                 {
-                    // Muda o status para Pronto
+                   
                     pedido.Status = StatusPedido.Pronto;
 
-                    // Remove da cozinha
+                 
                     BancoDePedidos.BancoPedidos.pedidosPraCozinha.Remove(pedido);
 
-                    // Adiciona ao balcão
+                   
                     BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido);
 
                     CarregarPedidos();
@@ -122,9 +121,9 @@ namespace Cantina2._0
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                var nomeCliente = dataGridView1.SelectedRows[0].Cells["NomeCliente"].Value.ToString();
+                var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
 
-                var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells["Data"].Value.ToString());
+                var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString());
 
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
                 .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
