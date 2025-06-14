@@ -15,13 +15,11 @@ namespace Cantina2._0
 {
     public partial class Tela_do_balcao : Form
     {
-        private Dictionary<string, StatusPedido> statusPedidos;
 
 
         public Tela_do_balcao()
         {
             InitializeComponent();
-            statusPedidos = new Dictionary<string, StatusPedido>();
             pictureBox1.TabStop = false;
 
             CarregarPedidos();
@@ -73,7 +71,7 @@ namespace Cantina2._0
             {
                 case StatusPedido.A_Fazer: return StatusPedido.Em_Preparo;
                 case StatusPedido.Em_Preparo: return StatusPedido.Pronto;
-                case StatusPedido.Pronto: return StatusPedido.A_Fazer;
+                case StatusPedido.Pronto: return StatusPedido.Entregue;
                 default: return StatusPedido.A_Fazer;
             }
         }
@@ -89,14 +87,14 @@ namespace Cantina2._0
 
         }
 
-        private void DisplayCustomerOrderDetails(object sender, DataGridViewCellEventArgs e)
+        private void MostrarComandaListBox(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
 
                 listBox1.Items.Clear();
 
-                var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells["CLIENTE"].Value.ToString();
+                var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
 
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
                     .FirstOrDefault(p => p.NomeCliente == nomeCliente);
@@ -160,14 +158,15 @@ namespace Cantina2._0
             var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
                 .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
 
-            if (pedido == null)
+            if (pedido != null)
             {
                 MessageBox.Show("Pedido não encontrado.");
                 return;
             }
 
-            BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
+
             CarregarPedidos();
+
         }
     }
 }

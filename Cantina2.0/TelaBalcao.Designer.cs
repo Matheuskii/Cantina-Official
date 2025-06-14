@@ -50,7 +50,7 @@ namespace Cantina2._0
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(645, 282);
             dataGridView1.TabIndex = 0;
-            dataGridView1.CellClick += DisplayCustomerOrderDetails;
+            dataGridView1.CellClick += MostrarComandaListBox;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // itemPedidoBindingSource

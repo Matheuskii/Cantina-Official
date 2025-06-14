@@ -132,6 +132,18 @@ namespace Cantina2._0
                 {
                     pedido.Status = ProximoStatus(pedido.Status);
                     CarregarPedidos();
+                    dataGridView1.ClearSelection();
+                    if (pedido.Status == StatusPedido.Entregue)
+                    {
+                        BancoDePedidos.BancoPedidos.pedidosPraCozinha.Remove(pedido);
+                        BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido);
+                        MessageBox.Show("Pedido entregue com sucesso!");
+                        CarregarPedidos();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Status do pedido alterado para: {pedido.Status}");
+                    }
                 }
             }
             else
