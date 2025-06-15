@@ -22,6 +22,7 @@ namespace Cantina2._0
 
             InitializeComponent();
             dataGridView1.SelectionMode  = DataGridViewSelectionMode.FullRowSelect;
+
             pictureBox1.TabStop = false;
             
             CarregarPedidos();
@@ -48,7 +49,6 @@ namespace Cantina2._0
             dataGridView1.Columns[2].HeaderText = "ITENS";
             dataGridView1.Columns[3].HeaderText = "STATUS";
             dataGridView1.Columns[4].HeaderText = "VIAGEM";
-            dataGridView1.Columns[4].Visible = false; // Oculta a coluna de viagem, se necessário
             dataGridView1.Columns[0].Width = 150;
             dataGridView1.Columns[1].Width = 150;
             dataGridView1.Columns[2].Width = 250;
@@ -72,11 +72,7 @@ namespace Cantina2._0
                     return StatusPedido.A_Fazer;
             }
         }
-        private void Tela_da_cozinha_Activated(object sender, EventArgs e)
-        {
-            CarregarPedidos();
-        }
-        private void btnRetirar_Click(object sender, EventArgs e)
+            private void btnRetirar_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
@@ -87,13 +83,7 @@ namespace Cantina2._0
 
                 if (pedido != null)
                 {
-                   
-                    pedido.Status = StatusPedido.Pronto;
-
-                 
                     BancoDePedidos.BancoPedidos.pedidosPraCozinha.Remove(pedido);
-
-                   
                     BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido);
 
                     CarregarPedidos();
@@ -102,6 +92,7 @@ namespace Cantina2._0
             else
             {
                 MessageBox.Show("Selecione um pedido para retirar.");
+                dataGridView1.ClearSelection();
             }
         }
         private void Form2_Load(object sender, EventArgs e)
@@ -116,7 +107,7 @@ namespace Cantina2._0
 
         }
         // Botão para avançar o status do pedido selecionado no balcão.
-        private void btnEntregue_Click(object sender, EventArgs e)
+        private void btnStatus_Click(object sender, EventArgs e)
         {
 
             if (dataGridView1.SelectedRows.Count > 0)
@@ -135,6 +126,12 @@ namespace Cantina2._0
                     dataGridView1.ClearSelection();
                     if (pedido.Status == StatusPedido.Entregue)
                     {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show("Deseja entregar o pedido?", "Confirmação", buttons);
+                        if (result == DialogResult.No)
+                        {
+                            return;
+                        }
                         BancoDePedidos.BancoPedidos.pedidosPraCozinha.Remove(pedido);
                         BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido);
                         MessageBox.Show("Pedido entregue com sucesso!");
@@ -143,12 +140,14 @@ namespace Cantina2._0
                     else
                     {
                         MessageBox.Show($"Status do pedido alterado para: {pedido.Status}");
+                        CarregarPedidos();
                     }
                 }
             }
             else
             {
                 MessageBox.Show("Selecione um pedido para alterar o status.");
+                dataGridView1.ClearSelection();
             }
         }
 

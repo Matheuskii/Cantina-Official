@@ -27,9 +27,10 @@ namespace Cantina2._0;
     {
         var pedidosChamada = BancoDePedidos.BancoPedidos.GetPedidosProBalcao();
 
-        var pedidosFormatados = pedidos.Select(p => new
+        var pedidosFormatados = pedidosChamada.Select(p => new
         {
             NomeCliente = p.NomeCliente,
+            Data = p.Data.ToString(),
             Status = p.Status.ToString(),
         }).ToList();
 

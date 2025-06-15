@@ -94,7 +94,7 @@
             btnEntregue.TabIndex = 23;
             btnEntregue.Text = "Mudar o status";
             btnEntregue.UseVisualStyleBackColor = false;
-            btnEntregue.Click += btnEntregue_Click;
+            btnEntregue.Click += btnStatus_Click;
             // 
             // label5
             // 

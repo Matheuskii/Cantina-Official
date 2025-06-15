@@ -109,11 +109,11 @@ namespace Cantina2._0
                     dataGridView1.ClearSelection();
                     dataGridView1.Rows[e.RowIndex].Selected = true;
                 }
-
+            
             }
         }
 
-        private void UpdateOrderStatus_Click(object sender, EventArgs e)
+        private void btnAtualizarStatus(object sender, EventArgs e)
         {
 
             if (dataGridView1.SelectedRows.Count == 0)
@@ -143,7 +143,7 @@ namespace Cantina2._0
                 CarregarPedidos();
 
         }
-        private void btnRetirar_Click(object sender, EventArgs e)
+        private void btnRetirarPedido_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
@@ -160,12 +160,25 @@ namespace Cantina2._0
 
             if (pedido != null)
             {
+                if (pedido.Status == StatusPedido.Entregue)
+                {
+                    BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
+                    MessageBox.Show("Pedido retirado com sucesso!");
+                    CarregarPedidos();
+                }
+                else
+                {
+                    MessageBox.Show("Esse pedido não está com o Status correto");
+                }
+            }
+            else
+            {
                 MessageBox.Show("Pedido não encontrado.");
                 return;
             }
 
 
-            CarregarPedidos();
+           
 
         }
     }
