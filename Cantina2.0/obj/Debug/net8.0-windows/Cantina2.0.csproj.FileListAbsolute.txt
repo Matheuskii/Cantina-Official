@@ -38,3 +38,24 @@ C:\Users\mahme\OneDrive\Documents\Matheus\Repositorios\Cantina-Senai\Cantina-Off
 C:\Users\mahme\OneDrive\Documents\Matheus\Repositorios\Cantina-Senai\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.pdb
 C:\Users\mahme\OneDrive\Documents\Matheus\Repositorios\Cantina-Senai\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.genruntimeconfig.cache
 C:\Users\mahme\OneDrive\Documents\Matheus\Repositorios\Cantina-Senai\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\ref\Cantina2.0.dll
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.Properties.Resources.resources
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.Tela_do_balcao.resources
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.TelaCozinha.resources
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.csproj.GenerateResource.cache
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.AssemblyInfoInputs.cache
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.AssemblyInfo.cs
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.csproj.CoreCompileInputs.cache
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.sourcelink.json
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.dll
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\refint\Cantina2.0.dll
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.pdb
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\bin\Debug\net8.0-windows\Cantina2.0.exe
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\bin\Debug\net8.0-windows\Cantina2.0.deps.json
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\bin\Debug\net8.0-windows\Cantina2.0.runtimeconfig.json
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\bin\Debug\net8.0-windows\Cantina2.0.dll
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\bin\Debug\net8.0-windows\Cantina2.0.pdb
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.Tela_Chamada.resources
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.TelaChamada.resources
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.genruntimeconfig.cache
+C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\ref\Cantina2.0.dll

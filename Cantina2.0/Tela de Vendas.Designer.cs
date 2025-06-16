@@ -1,6 +1,6 @@
 ﻿namespace Cantina2._0
 {
-    partial class Form1
+    partial class Tela_Chamada
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tela_Chamada));
             AddButton = new Button();
             removeItem = new Button();
             ListDisp = new ListBox();
@@ -94,7 +94,7 @@
             // Carrinho
             // 
             Carrinho.BackColor = Color.FromArgb(243, 241, 238);
-            Carrinho.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
+            Carrinho.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Carrinho.FormattingEnabled = true;
             Carrinho.ItemHeight = 14;
             Carrinho.Location = new Point(559, 147);
@@ -186,6 +186,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(141, 23);
             comboBox1.TabIndex = 18;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // imageList1
             // 
@@ -251,7 +252,7 @@
             checkViagem.UseVisualStyleBackColor = true;
             checkViagem.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // Form1
+            // Tela_Chamada
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -273,7 +274,7 @@
             Controls.Add(ListDisp);
             Controls.Add(removeItem);
             Controls.Add(AddButton);
-            Name = "Form1";
+            Name = "Tela_Chamada";
             Text = "Form1";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)boxQuantity).EndInit();

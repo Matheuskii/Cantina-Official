@@ -7,9 +7,9 @@ using static Cantina2._0.BancoDePedidos;
 
 namespace Cantina2._0
 {
-    public partial class Form1 : Form
+    public partial class Tela_Chamada : Form
     {
-        public Form1()
+        public Tela_Chamada()
         {
             InitializeComponent();
             pictureBox1.TabStop = false;
@@ -205,6 +205,7 @@ namespace Cantina2._0
             foreach (ItemPedido itemExt in Carrinho.SelectedItems)
             {
                 resumo.Add(itemExt.NomeProduto);
+                resumo.ToString();
 
             }
             //Lista para a entrega de cozinha
@@ -215,6 +216,7 @@ namespace Cantina2._0
 
                     MessageBox.Show(
                     $"Cliente: {nome}\n\n" +
+                    $"Itens{resumo}"+
                     $"Total a pagar: R${total:F2}\n\n" +
                     $"Extrato:{resumo}" +
                     "COMANDA");
@@ -371,6 +373,11 @@ namespace Cantina2._0
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

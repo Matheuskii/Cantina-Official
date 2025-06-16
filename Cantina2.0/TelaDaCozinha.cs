@@ -21,7 +21,7 @@ namespace Cantina2._0
         {
 
             InitializeComponent();
-            dataGridView1.SelectionMode  = DataGridViewSelectionMode.FullRowSelect;
+  
 
             pictureBox1.TabStop = false;
             
@@ -74,7 +74,7 @@ namespace Cantina2._0
         }
             private void btnRetirar_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count >= 0)
             {
                 var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
                 var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString());
@@ -110,14 +110,14 @@ namespace Cantina2._0
         private void btnStatus_Click(object sender, EventArgs e)
         {
 
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count >= 0)
             {
                 var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
 
                 var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString());
 
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
-                .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
+                .FirstOrDefault(p => p.NomeCliente == nomeCliente || p.Data == data);
 
                 if (pedido != null)
                 {

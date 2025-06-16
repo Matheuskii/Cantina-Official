@@ -62,15 +62,15 @@
             // 
             // form1BindingSource
             // 
-            form1BindingSource.DataSource = typeof(Form1);
+            form1BindingSource.DataSource = typeof(Tela_Chamada);
             // 
             // form1BindingSource1
             // 
-            form1BindingSource1.DataSource = typeof(Form1);
+            form1BindingSource1.DataSource = typeof(Tela_Chamada);
             // 
             // form1BindingSource2
             // 
-            form1BindingSource2.DataSource = typeof(Form1);
+            form1BindingSource2.DataSource = typeof(Tela_Chamada);
             // 
             // dataGridView1
             // 

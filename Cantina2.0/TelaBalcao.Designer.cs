@@ -59,7 +59,7 @@ namespace Cantina2._0
             // 
             // form1BindingSource
             // 
-            form1BindingSource.DataSource = typeof(Form1);
+            form1BindingSource.DataSource = typeof(Tela_Chamada);
             // 
             // listBox1
             // 
@@ -68,7 +68,6 @@ namespace Cantina2._0
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(188, 276);
             listBox1.TabIndex = 1;
-            
             // 
             // button1
             // 
@@ -76,34 +75,34 @@ namespace Cantina2._0
             button1.Name = "button1";
             button1.Size = new Size(286, 76);
             button1.TabIndex = 2;
-            button1.Text = "Change status";
+            button1.Text = "Atualizar Status";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += UpdateOrderStatus_Click;
+            button1.Click += btnAtualizarStatus;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(25, 12);
+            pictureBox1.Location = new Point(34, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(181, 51);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
             // 
             // btnRetirar
             // 
-            btnRetirar.Location = new Point(348, 392);
+            btnRetirar.Location = new Point(339, 392);
             btnRetirar.Name = "btnRetirar";
             btnRetirar.Size = new Size(286, 76);
             btnRetirar.TabIndex = 4;
-            btnRetirar.Text = "Change status";
+            btnRetirar.Text = "Retirar Pedido";
             btnRetirar.UseVisualStyleBackColor = true;
-           
+            btnRetirar.Click += btnRetirarPedido_Click;
             // 
-            // Tela_da_cozinha
+            // Tela_do_balcao
             // 
             AutoScaleDimensions = new SizeF(8F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(202, 196, 183);
             ClientSize = new Size(914, 480);
             Controls.Add(btnRetirar);
@@ -113,9 +112,9 @@ namespace Cantina2._0
             Controls.Add(dataGridView1);
             Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 186);
             ForeColor = Color.FromArgb(120, 118, 100);
-            Name = "Tela_da_cozinha";
+            Name = "Tela_do_balcao";
             Text = "Tela_da_cozinha";
-            Load += Tela_da_cozinha_Load;
+            Load += Tela_do_balcao_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemPedidoBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).EndInit();
@@ -123,7 +122,7 @@ namespace Cantina2._0
             ResumeLayout(false);
         }
 
-       
+
 
         #endregion
 
