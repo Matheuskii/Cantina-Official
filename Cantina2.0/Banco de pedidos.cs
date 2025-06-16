@@ -11,6 +11,7 @@ internal static class BancoDePedidos
             public static BindingList<Pedido> pedidosProBalcao = new BindingList<Pedido>();
 
 
+
             public static void AdicionarPedido(Pedido pedido)
             {
                 pedidosPraCozinha.Add(pedido);

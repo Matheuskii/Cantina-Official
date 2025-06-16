@@ -73,7 +73,7 @@ namespace Cantina2._0
                 case StatusPedido.A_Fazer: return StatusPedido.Em_Preparo;
                 case StatusPedido.Em_Preparo: return StatusPedido.Pronto;
                 case StatusPedido.Pronto: return StatusPedido.Entregue;
-                case StatusPedido.Entregue: return StatusPedido.Entregue;
+                case StatusPedido.Entregue: return StatusPedido.A_Fazer;
                 default: return StatusPedido.A_Fazer;
             }
         }
@@ -119,35 +119,43 @@ namespace Cantina2._0
         private void btnAtualizarStatus(object sender, EventArgs e)
         {
 
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count >= 0)
             {
                 var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                var dataStr = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-                var data = DateTime.ParseExact(dataStr, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+
+                var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString());
 
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
-                    .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
+                .FirstOrDefault(p => p.NomeCliente == nomeCliente || p.Data == data);
 
                 if (pedido != null)
                 {
                     pedido.Status = ProximoStatus(pedido.Status);
-
+                    CarregarPedidos();
+                    dataGridView1.ClearSelection();
                     if (pedido.Status == StatusPedido.Entregue)
-
-
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show("O pedido já está entregue?", "Confirmação", buttons);
+                        if (result == DialogResult.No)
+                        {
+                            return;
+                        }
+                        BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
+                        MessageBox.Show("Pedido entregue com sucesso!");
                         CarregarPedidos();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Status do pedido alterado para: {pedido.Status}");
+                        CarregarPedidos();
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Pedido não encontrado.");
-                    return;
-                }
-
             }
             else
             {
-                MessageBox.Show("Pedido não encontrado.");
-                return;
+                MessageBox.Show("Selecione um pedido para alterar o status.");
+                dataGridView1.ClearSelection();
             }
 
 

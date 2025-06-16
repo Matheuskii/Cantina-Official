@@ -17,15 +17,15 @@ namespace Cantina2._0
             boxRemove.Minimum = 1;
             boxQuantity.Minimum = 1;
 
-            ListDisp.Items.Add(new Produto("P�o de Queijo", 3.50, true));
+            ListDisp.Items.Add(new Produto("Pão de Queijo", 3.50, true));
             ListDisp.Items.Add(new Produto("Coxinha", 5.00, true));
             ListDisp.Items.Add(new Produto("Pastel de Carne", 6.00, false));
             ListDisp.Items.Add(new Produto("Pastel de Queijo", 5.50, false));
             ListDisp.Items.Add(new Produto("Refrigerante Lata", 4.50, true));
             ListDisp.Items.Add(new Produto("Hamburguer Simples", 8.00, false));
-            ListDisp.Items.Add(new Produto("Hamb�rguer com Queijo", 9.00, false));
+            ListDisp.Items.Add(new Produto("Hambúrguer com Queijo", 9.00, false));
             ListDisp.Items.Add(new Produto("X-Tudo", 12.00, false));
-            ListDisp.Items.Add(new Produto("�gua Mineral(500ml)", 4.00, true));
+            ListDisp.Items.Add(new Produto("Água Mineral(500ml)", 4.00, true));
 
         }
 
@@ -187,7 +187,7 @@ namespace Cantina2._0
             }
             if (Carrinho.Items.Count == 0)
             {
-                MessageBox.Show("O carrinho est� vazio. Adicione itens antes de finalizar o pedido.", "Erro");
+                MessageBox.Show("O carrinho está vazio. Adicione itens antes de finalizar o pedido.", "Erro");
                 return;
             }
             if (total == 0)
@@ -201,13 +201,7 @@ namespace Cantina2._0
             double valorPago = 0;
             double troco = 0;
             bool pagamentoOk = false;
-            List<string> resumo = new();
-            foreach (ItemPedido itemExt in Carrinho.SelectedItems)
-            {
-                resumo.Add(itemExt.NomeProduto);
-                resumo.ToString();
-
-            }
+           
             //Lista para a entrega de cozinha
 
             switch (metodoPagamento)
@@ -215,12 +209,11 @@ namespace Cantina2._0
                 case 0: // Dinheiro
 
                     MessageBox.Show(
-                    $"Cliente: {nome}\n\n" +
-                    $"Itens{resumo}"+
-                    $"Total a pagar: R${total:F2}\n\n" +
-                    $"Extrato:{resumo}" +
-                    "COMANDA");
-                    MessageBox.Show("Qual quantidade o cliente ir� pagar?", "Pagamento");
+                        $"Cliente: {nome}\n\n" +
+                        $"Itens:{Carrinho.Items}" +
+                        $"Total a pagar: R${total:F2}\n\n" +
+                        "COMANDA");
+                    MessageBox.Show("Qual quantidade o cliente irá pagar?", "Pagamento");
 
                     while (valorPago < total)
                     {
@@ -236,32 +229,33 @@ namespace Cantina2._0
                             {
                                 troco = valorPago - total;
                                 MessageBox.Show($"Troco: R$ {troco:F2}");
+
                                 MessageBox.Show("Pagamento realizado com sucesso!");
                                 pagamentoOk = true;
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Valor inv�lido. Tente novamente.");
+                            MessageBox.Show("Valor inválido. Tente novamente.");
                         }
                     }
                     break;
 
-                case 1: // Cart�o de cr�dito
-                case 2: // Cart�o  ded�bito
+                case 1: // Cartão de crédito
+                case 2: // Cartão  débito
                 case 3: // PIX
-                case 4: // Vale Refei��o
-                case 5: // Vale Alimenta��o
+                case 4: // Vale Refeição
+                case 5: // Vale Alimentação
                     MessageBox.Show(
                         $"Cliente: {nome}\n\n" +
-                        $"Itens:{Carrinho.SelectedItems.ToString}" +
+                        $"Itens:{Carrinho.Items}" +
                         $"Total a pagar: R${total:F2}\n\n" +
                         "COMANDA");
                     MessageBox.Show("Pagamento realizado com sucesso!");
                     pagamentoOk = true;
                     break;
                 default:
-                    MessageBox.Show("Selecione um m�todo de pagamento v�lido.", "Erro");
+                    MessageBox.Show("Selecione um método de pagamento válido.", "Erro");
                     return;
             }
 
@@ -346,10 +340,24 @@ namespace Cantina2._0
 
             MessageBox.Show($"Pedido do cliente {nome} registrado com sucesso!");
 
-            TelaCozinha telaBalcao = new TelaCozinha();
+            
+        }
+        private void BtnBalcao_Click(object sender, EventArgs e)
+        {
+            Tela_do_balcao telaBalcao = new Tela_do_balcao();
             telaBalcao.Show();
-            Tela_do_balcao tela_Da_Cozinha = new Tela_do_balcao();
-            tela_Da_Cozinha.Show();
+            
+        }
+        private void BtnCozinha_Click(object sender, EventArgs e)
+        {
+            TelaCozinha telaCozinha = new TelaCozinha();
+            telaCozinha.Show();
+        
+        }
+        private void BtnChamada_Click(object sender, EventArgs e)
+        {
+            Tela_Chamada telaChamada = new Tela_Chamada();
+            telaChamada.Show();
         }
 
         private void ListDisp_SelectedIndexChanged(object sender, EventArgs e)

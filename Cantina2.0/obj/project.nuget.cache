@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "GmxUJKsT9Ss=",
+  "dgSpecHash": "9nVruOHyG0k=",
   "success": true,
-  "projectFilePath": "C:\\Users\\25163072\\Downloads\\Matheus Alves de Melo\\Cantina-Trabalho final\\Cantina-Official\\Cantina2.0\\Cantina2.0.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\mahme\\OneDrive\\Documents\\Matheus\\Repositorios\\Cantina-Senai\\Cantina-Official\\Cantina2.0\\Cantina2.0.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mahme\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.17\\microsoft.netcore.app.ref.8.0.17.nupkg.sha512",
+    "C:\\Users\\mahme\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.17\\microsoft.windowsdesktop.app.ref.8.0.17.nupkg.sha512",
+    "C:\\Users\\mahme\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.17\\microsoft.aspnetcore.app.ref.8.0.17.nupkg.sha512",
+    "C:\\Users\\mahme\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.17\\microsoft.netcore.app.host.win-x64.8.0.17.nupkg.sha512"
+  ],
   "logs": []
 }

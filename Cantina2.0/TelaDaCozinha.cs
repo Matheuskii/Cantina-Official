@@ -100,6 +100,31 @@ namespace Cantina2._0
 
 
         }
+        private void MostrarComandaListBox(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+
+                listBox1.Items.Clear();
+
+                var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
+                    .FirstOrDefault(p => p.NomeCliente == nomeCliente);
+
+                if (pedido != null && pedido.ItensCozinha != null)
+                {
+                    foreach (var item in pedido.ItensCozinha)
+                    {
+                        listBox1.Items.Add($"{item.NomeProduto} - x{item.Quantidade} - R$ {item.Preco:F2}");
+                    }
+
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[e.RowIndex].Selected = true;
+                }
+
+            }
+        }
 
        
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -127,7 +152,7 @@ namespace Cantina2._0
                     if (pedido.Status == StatusPedido.Entregue)
                     {
                         MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                        DialogResult result = MessageBox.Show("Deseja entregar o pedido?", "Confirmação", buttons);
+                        DialogResult result = MessageBox.Show("Deseja entregar o pedido para o Balcão?", "Confirmação", buttons);
                         if (result == DialogResult.No)
                         {
                             return;
