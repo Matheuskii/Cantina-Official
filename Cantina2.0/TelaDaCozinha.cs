@@ -72,7 +72,7 @@ namespace Cantina2._0
                     return StatusPedido.A_Fazer;
             }
         }
-            private void btnRetirar_Click(object sender, EventArgs e)
+        private void btnRetirar_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count >= 0)
             {
@@ -81,18 +81,32 @@ namespace Cantina2._0
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
                     .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
 
-                if (pedido != null)
+                if (pedido != null && pedido.ItensCozinha != null && pedido.ItensCozinha.Count > 0)
                 {
-                    BancoDePedidos.BancoPedidos.pedidosPraCozinha.Remove(pedido);
-                    BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido);
 
-                    CarregarPedidos();
+                    if (pedido.Status != StatusPedido.Pronto)
+                    {
+                        MessageBox.Show("O pedido ainda não está pronto para retirada.");
+                        return;
+                    }
+
+                    DialogResult result = MessageBox.Show($"Deseja retirar o pedido de {pedido.NomeCliente}?", "Confirmação", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
+                    {
+                        BancoDePedidos.BancoPedidos.pedidosPraCozinha.Remove(pedido);
+                        BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido);
+
+                        CarregarPedidos();
+                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Selecione um pedido para retirar.");
-                dataGridView1.ClearSelection();
+                else
+                {
+                    MessageBox.Show("Selecione um pedido para retirar.");
+                    dataGridView1.ClearSelection();
+                }
             }
         }
         private void Form2_Load(object sender, EventArgs e)
@@ -108,11 +122,11 @@ namespace Cantina2._0
                 listBox1.Items.Clear();
 
                 var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-
+                var data = DateTime.Parse(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
-                    .FirstOrDefault(p => p.NomeCliente == nomeCliente);
+                    .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
 
-                if (pedido != null)
+                if (pedido != null && pedido.ItensCozinha != null);
                 {
                     foreach (var item in pedido.ItensCozinha)
                     {
@@ -131,7 +145,6 @@ namespace Cantina2._0
         {
 
         }
-        // Botão para avançar o status do pedido selecionado no balcão.
         private void btnStatus_Click(object sender, EventArgs e)
         {
 

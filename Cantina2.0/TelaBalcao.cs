@@ -133,32 +133,9 @@ namespace Cantina2._0
                     pedido.Status = ProximoStatus(pedido.Status);
                     CarregarPedidos();
                     dataGridView1.ClearSelection();
-                    if (pedido.Status == StatusPedido.Entregue)
-                    {
-                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                        DialogResult result = MessageBox.Show("O pedido já está entregue?", "Confirmação", buttons);
-                        if (result == DialogResult.No)
-                        {
-                            return;
-                        }
-                        BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
-                        MessageBox.Show("Pedido entregue com sucesso!");
-                        CarregarPedidos();
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Status do pedido alterado para: {pedido.Status}");
-                        CarregarPedidos();
-                    }
+
                 }
             }
-            else
-            {
-                MessageBox.Show("Selecione um pedido para alterar o status.");
-                dataGridView1.ClearSelection();
-            }
-
-
         }
         private void btnRetirarPedido_Click(object sender, EventArgs e)
         {
@@ -169,11 +146,26 @@ namespace Cantina2._0
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
                     .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
 
-                if (pedido != null)
+                if (pedido != null && pedido.Status == StatusPedido.Entregue)
                 {
-                    BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
+                    DialogResult result = MessageBox.Show($"Deseja retirar o pedido de {pedido.NomeCliente}?", "Retirar Pedido", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
+                        CarregarPedidos();
+                        MessageBox.Show($"Pedido de {pedido.NomeCliente} retirado com sucesso!");
 
-                    CarregarPedidos();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Retirada cancelada.");
+                        dataGridView1.ClearSelection();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Selecione um pedido entregue para retirar.");
+                    dataGridView1.ClearSelection();
                 }
             }
             else
