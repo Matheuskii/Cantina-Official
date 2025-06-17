@@ -112,7 +112,7 @@ namespace Cantina2._0
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
                     .FirstOrDefault(p => p.NomeCliente == nomeCliente);
 
-                if (pedido != null && pedido.ItensCozinha != null)
+                if (pedido != null)
                 {
                     foreach (var item in pedido.ItensCozinha)
                     {

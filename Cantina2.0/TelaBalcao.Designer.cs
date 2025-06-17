@@ -68,6 +68,7 @@ namespace Cantina2._0
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(188, 276);
             listBox1.TabIndex = 1;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // button1
             // 

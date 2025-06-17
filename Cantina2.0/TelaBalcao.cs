@@ -162,33 +162,24 @@ namespace Cantina2._0
         }
         private void btnRetirarPedido_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count >= 0)
             {
                 var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
                 var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString());
-
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
                     .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
 
                 if (pedido != null)
                 {
-                    if (pedido.Status == StatusPedido.Entregue)
-                    {
-                        BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
-                        MessageBox.Show("Pedido retirado com sucesso!");
-                        CarregarPedidos();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Esse pedido não está com o Status correto");
-                    }
-                }
+                    BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
 
+                    CarregarPedidos();
+                }
             }
             else
             {
-                MessageBox.Show("Pedido não encontrado.");
-                return;
+                MessageBox.Show("Selecione um pedido para retirar.");
+                dataGridView1.ClearSelection();
             }
 
 
@@ -197,6 +188,11 @@ namespace Cantina2._0
         }
 
         private void Tela_do_balcao_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

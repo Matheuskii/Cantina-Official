@@ -39,6 +39,7 @@
             label5 = new Label();
             label1 = new Label();
             btnRetirar = new Button();
+            listBox1 = new ListBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource1).BeginInit();
@@ -79,7 +80,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 82);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(762, 218);
+            dataGridView1.Size = new Size(528, 218);
             dataGridView1.TabIndex = 21;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             dataGridView1.CurrentCellChanged += dataGridView1_CurrentCellChanged;
@@ -128,19 +129,29 @@
             btnRetirar.UseVisualStyleBackColor = false;
             btnRetirar.Click += btnRetirar_Click;
             // 
-            // TelaBalcao
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(582, 82);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(188, 274);
+            listBox1.TabIndex = 27;
+            // 
+            // TelaCozinha
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
+            Controls.Add(listBox1);
             Controls.Add(btnRetirar);
             Controls.Add(label5);
             Controls.Add(label1);
             Controls.Add(btnEntregue);
             Controls.Add(dataGridView1);
             Controls.Add(pictureBox1);
-            Name = "TelaBalcao";
+            Name = "TelaCozinha";
             Text = "Form2";
             Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -165,5 +176,6 @@
         private Label label5;
         private Label label1;
         private Button btnRetirar;
+        private ListBox listBox1;
     }
 }
