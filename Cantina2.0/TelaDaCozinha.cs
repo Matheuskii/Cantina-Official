@@ -72,48 +72,19 @@ namespace Cantina2._0
                     return StatusPedido.A_Fazer;
             }
         }
-        private void btnRetirar_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count >= 0)
-            {
-                var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString());
-                var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
-                    .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
-
-                if (pedido != null && pedido.ItensCozinha != null && pedido.ItensCozinha.Count > 0)
-                {
-
-                    if (pedido.Status != StatusPedido.Pronto)
-                    {
-                        MessageBox.Show("O pedido ainda não está pronto para retirada.");
-                        return;
-                    }
-
-                    DialogResult result = MessageBox.Show($"Deseja retirar o pedido de {pedido.NomeCliente}?", "Confirmação", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.No)
-                    {
-                        return;
-                    }
-                    {
-                        BancoDePedidos.BancoPedidos.pedidosPraCozinha.Remove(pedido);
-                        BancoDePedidos.BancoPedidos.AdicionarPedidoBalcao(pedido);
-
-                        CarregarPedidos();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Selecione um pedido para retirar.");
-                    dataGridView1.ClearSelection();
-                }
-            }
-        }
+        
+            
+        
         private void Form2_Load(object sender, EventArgs e)
         {
 
 
         }
+      
+
+                
+            
+        
         private void MostrarComandaListBox(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -122,11 +93,11 @@ namespace Cantina2._0
                 listBox1.Items.Clear();
 
                 var nomeCliente = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                var data = DateTime.Parse(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-                var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
-                    .FirstOrDefault(p => p.NomeCliente == nomeCliente && p.Data == data);
 
-                if (pedido != null && pedido.ItensCozinha != null);
+                var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
+                    .FirstOrDefault(p => p.NomeCliente == nomeCliente);
+
+                if (pedido != null && pedido.ItensCozinha != null)
                 {
                     foreach (var item in pedido.ItensCozinha)
                     {
@@ -136,7 +107,15 @@ namespace Cantina2._0
                     dataGridView1.ClearSelection();
                     dataGridView1.Rows[e.RowIndex].Selected = true;
                 }
+                else
+                {
+                    listBox1.Items.Clear();
+                }
 
+            }
+            else
+            {
+                listBox1.Items.Clear();
             }
         }
 
@@ -148,14 +127,14 @@ namespace Cantina2._0
         private void btnStatus_Click(object sender, EventArgs e)
         {
 
-            if (dataGridView1.SelectedRows.Count >= 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
                 var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
 
-                var data = DateTime.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString());
+                var data = DateTime.TryParse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString(), out DateTime datinha);
 
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidos()
-                .FirstOrDefault(p => p.NomeCliente == nomeCliente || p.Data == data);
+                .FirstOrDefault(p => p.NomeCliente == nomeCliente || p.Data == datinha);
 
                 if (pedido != null)
                 {

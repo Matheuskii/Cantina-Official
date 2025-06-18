@@ -74,19 +74,10 @@ namespace Cantina2._0
             ListDisp.ClearSelected();
             boxQuantity.Value = 1;
         }
-        public static class Globais
-        {
-            public static int QuantidadeSelecionada { get; set; }
-
-
-        }
+        
 
 
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -201,7 +192,7 @@ namespace Cantina2._0
             double valorPago = 0;
             double troco = 0;
             bool pagamentoOk = false;
-           
+
             //Lista para a entrega de cozinha
 
             switch (metodoPagamento)
@@ -210,7 +201,7 @@ namespace Cantina2._0
 
                     MessageBox.Show(
                         $"Cliente: {nome}\n\n" +
-                        $"Itens:{Carrinho.Items}" +
+                        $"Itens:{Carrinho.Items.ToString()}" +
                         $"Total a pagar: R${total:F2}\n\n" +
                         "COMANDA");
                     MessageBox.Show("Qual quantidade o cliente irá pagar?", "Pagamento");
@@ -340,19 +331,19 @@ namespace Cantina2._0
 
             MessageBox.Show($"Pedido do cliente {nome} registrado com sucesso!");
 
-            
+
         }
         private void BtnBalcao_Click(object sender, EventArgs e)
         {
             Tela_do_balcao telaBalcao = new Tela_do_balcao();
             telaBalcao.Show();
-            
+
         }
         private void BtnCozinha_Click(object sender, EventArgs e)
         {
             TelaCozinha telaCozinha = new TelaCozinha();
             telaCozinha.Show();
-        
+
         }
         private void BtnChamada_Click(object sender, EventArgs e)
         {

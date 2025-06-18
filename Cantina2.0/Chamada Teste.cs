@@ -34,7 +34,7 @@ InitializeComponent();
         }).ToList();
 
 
-        dgv.DataSource = pedidosFormatados; }
+        data.DataSource = pedidosFormatados; }
 
 
 

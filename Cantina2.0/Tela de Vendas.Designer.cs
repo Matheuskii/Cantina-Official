@@ -49,6 +49,8 @@
             label5 = new Label();
             fileSystemWatcher1 = new FileSystemWatcher();
             checkViagem = new CheckBox();
+            button1 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)boxQuantity).BeginInit();
             ((System.ComponentModel.ISupportInitialize)boxRemove).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -252,12 +254,40 @@
             checkViagem.UseVisualStyleBackColor = true;
             checkViagem.CheckedChanged += checkBox1_CheckedChanged;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(243, 241, 238);
+            button1.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
+            button1.ForeColor = Color.FromArgb(17, 25, 12);
+            button1.Location = new Point(452, 386);
+            button1.Name = "button1";
+            button1.Size = new Size(158, 33);
+            button1.TabIndex = 24;
+            button1.Text = "Tela Balcao";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += BtnBalcao_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(243, 241, 238);
+            button2.Font = new Font("Agrandir Semi Narrow", 8.249999F, FontStyle.Bold);
+            button2.ForeColor = Color.FromArgb(17, 25, 12);
+            button2.Location = new Point(630, 386);
+            button2.Name = "button2";
+            button2.Size = new Size(158, 33);
+            button2.TabIndex = 25;
+            button2.Text = "Tela Cozinha";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += BtnCozinha_Click;
+            // 
             // Tela_Chamada
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(checkViagem);
             Controls.Add(label5);
             Controls.Add(label1);
@@ -306,5 +336,7 @@
         private Label label5;
         private FileSystemWatcher fileSystemWatcher1;
         private CheckBox checkViagem;
+        private Button button2;
+        private Button button1;
     }
 }

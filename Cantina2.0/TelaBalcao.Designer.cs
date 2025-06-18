@@ -38,6 +38,8 @@ namespace Cantina2._0
             button1 = new Button();
             pictureBox1 = new PictureBox();
             btnRetirar = new Button();
+            label5 = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemPedidoBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).BeginInit();
@@ -51,7 +53,7 @@ namespace Cantina2._0
             dataGridView1.Size = new Size(645, 282);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellClick += MostrarComandaListBox;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.CellContentClick += MostrarComandaListBox;
             // 
             // itemPedidoBindingSource
             // 
@@ -63,6 +65,7 @@ namespace Cantina2._0
             // 
             // listBox1
             // 
+            listBox1.ForeColor = Color.FromArgb(17, 25, 12);
             listBox1.FormattingEnabled = true;
             listBox1.Location = new Point(693, 95);
             listBox1.Name = "listBox1";
@@ -83,7 +86,7 @@ namespace Cantina2._0
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(34, 12);
+            pictureBox1.Location = new Point(36, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(181, 51);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -100,12 +103,36 @@ namespace Cantina2._0
             btnRetirar.UseVisualStyleBackColor = true;
             btnRetirar.Click += btnRetirarPedido_Click;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Agrandir Semi Narrow", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.FromArgb(17, 25, 12);
+            label5.Location = new Point(283, 24);
+            label5.Name = "label5";
+            label5.Size = new Size(106, 39);
+            label5.TabIndex = 27;
+            label5.Text = "Balcão";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Agrandir Semi Narrow", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(17, 25, 12);
+            label1.Location = new Point(240, 24);
+            label1.Name = "label1";
+            label1.Size = new Size(37, 39);
+            label1.TabIndex = 26;
+            label1.Text = "X";
+            // 
             // Tela_do_balcao
             // 
             AutoScaleDimensions = new SizeF(8F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(202, 196, 183);
             ClientSize = new Size(914, 480);
+            Controls.Add(label5);
+            Controls.Add(label1);
             Controls.Add(btnRetirar);
             Controls.Add(pictureBox1);
             Controls.Add(button1);
@@ -114,13 +141,14 @@ namespace Cantina2._0
             Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 186);
             ForeColor = Color.FromArgb(120, 118, 100);
             Name = "Tela_do_balcao";
-            Text = "Tela_da_cozinha";
+            Text = "Tela_do_Balcao";
             Load += Tela_do_balcao_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemPedidoBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
 
@@ -137,5 +165,7 @@ namespace Cantina2._0
         private Button button1;
         private PictureBox pictureBox1;
         private Button btnRetirar;
+        private Label label5;
+        private Label label1;
     }
 }

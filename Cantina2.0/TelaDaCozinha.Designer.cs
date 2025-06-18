@@ -38,7 +38,6 @@
             btnEntregue = new Button();
             label5 = new Label();
             label1 = new Label();
-            btnRetirar = new Button();
             listBox1 = new ListBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).BeginInit();
@@ -55,7 +54,7 @@
             pictureBox1.ErrorImage = (Image)resources.GetObject("pictureBox1.ErrorImage");
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
-            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Location = new Point(22, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(203, 64);
             pictureBox1.TabIndex = 20;
@@ -82,7 +81,8 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(528, 218);
             dataGridView1.TabIndex = 21;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
+            dataGridView1.CellClick += MostrarComandaListBox;
+            dataGridView1.CellContentClick += MostrarComandaListBox;
             dataGridView1.CurrentCellChanged += dataGridView1_CurrentCellChanged;
             // 
             // btnEntregue
@@ -117,25 +117,14 @@
             label1.TabIndex = 24;
             label1.Text = "X";
             // 
-            // btnRetirar
-            // 
-            btnRetirar.BackColor = Color.FromArgb(243, 241, 238);
-            btnRetirar.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRetirar.Location = new Point(222, 324);
-            btnRetirar.Name = "btnRetirar";
-            btnRetirar.Size = new Size(113, 88);
-            btnRetirar.TabIndex = 26;
-            btnRetirar.Text = "Retirar Concluido";
-            btnRetirar.UseVisualStyleBackColor = false;
-            btnRetirar.Click += btnRetirar_Click;
-            // 
             // listBox1
             // 
+            listBox1.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            listBox1.ForeColor = Color.FromArgb(17, 25, 12);
             listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
             listBox1.Location = new Point(582, 82);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(188, 274);
+            listBox1.Size = new Size(188, 260);
             listBox1.TabIndex = 27;
             // 
             // TelaCozinha
@@ -145,7 +134,6 @@
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
             Controls.Add(listBox1);
-            Controls.Add(btnRetirar);
             Controls.Add(label5);
             Controls.Add(label1);
             Controls.Add(btnEntregue);
@@ -175,7 +163,6 @@
         private Button btnEntregue;
         private Label label5;
         private Label label1;
-        private Button btnRetirar;
         private ListBox listBox1;
     }
 }

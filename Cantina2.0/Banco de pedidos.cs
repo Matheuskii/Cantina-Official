@@ -15,7 +15,6 @@ internal static class BancoDePedidos
             public static void AdicionarPedido(Pedido pedido)
             {
                 pedidosPraCozinha.Add(pedido);
-
             }
             public static void AdicionarPedidoBalcao(Pedido pedido2)
             {

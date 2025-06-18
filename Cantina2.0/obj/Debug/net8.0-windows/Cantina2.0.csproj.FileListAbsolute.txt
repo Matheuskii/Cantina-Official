@@ -56,6 +56,5 @@ C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina
 C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\bin\Debug\net8.0-windows\Cantina2.0.dll
 C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\bin\Debug\net8.0-windows\Cantina2.0.pdb
 C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.Tela_Chamada.resources
-C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2._0.TelaChamada.resources
 C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\Cantina2.0.genruntimeconfig.cache
 C:\Users\25163072\Downloads\Matheus Alves de Melo\Cantina-Trabalho final\Cantina-Official\Cantina2.0\obj\Debug\net8.0-windows\ref\Cantina2.0.dll
