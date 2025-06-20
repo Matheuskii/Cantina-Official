@@ -71,6 +71,8 @@ namespace Cantina2._0
             }
 
             total += produtoSelecionado.Preco * QuantidadeSelecionada;
+            lblTotal.Text = $"Total: R$ {total:F2}";
+            // Limpa a seleção e o valor da quantidade após adicionar o item
             ListDisp.ClearSelected();
             boxQuantity.Value = 1;
         }
@@ -192,8 +194,7 @@ namespace Cantina2._0
             double valorPago = 0;
             double troco = 0;
             bool pagamentoOk = false;
-
-            //Lista para a entrega de cozinha
+            string extrato = string.Join("\n", Carrinho.Items.Cast<object>().Select(item => item.ToString()));
 
             switch (metodoPagamento)
             {
@@ -201,26 +202,48 @@ namespace Cantina2._0
 
                     MessageBox.Show(
                         $"Cliente: {nome}\n\n" +
-                        $"Itens:{Carrinho.Items.ToString()}" +
+                        $"Itens:{extrato}" +
                         $"Total a pagar: R${total:F2}\n\n" +
                         "COMANDA");
                     MessageBox.Show("Qual quantidade o cliente irá pagar?", "Pagamento");
 
                     while (valorPago < total)
                     {
-                        string input = Microsoft.VisualBasic.Interaction.InputBox("Digite o valor pago:", "Pagamento", "0")
-                            ;
+                        string input = Microsoft.VisualBasic.Interaction.InputBox("Digite o valor pago:", "Pagamento", "0")  ;
                         if (double.TryParse(input.Replace(',', '.'), out valorPago))
                         {
                             if (valorPago < total)
                             {
                                 MessageBox.Show($"Valor insuficiente. Faltam R$ {total - valorPago:F2}.");
+                                MessageBox.Show("Deseja retirar o pedido?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                DialogResult result = MessageBox.Show("Deseja retirar o pedido?", "Pergunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (result == DialogResult.Yes)
+                                {
+                                    Carrinho.Items.Clear();
+                                    textBox1.Clear();
+                                    total = 0;
+                                    return;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Por favor, insira um valor válido.");
+                                    continue;
+                                }
                             }
                             else
                             {
                                 troco = valorPago - total;
                                 MessageBox.Show($"Troco: R$ {troco:F2}");
-
+                                MessageBox.Show(
+                                    $"🧾 COMANDA\n\n" +
+                                    $"Cliente: {nome}\n\n" +
+                                    $"Itens:\n{extrato}\n" +
+                                    $"-----------------------------\n" +
+                                    $"Total a pagar: R${total:F2}\n" +
+                                    $"Valor pago: R${valorPago:F2}\n" +
+                                    $"Troco: R${troco:F2}\n",
+                                    "Resumo do Pedido"
+                                );
                                 MessageBox.Show("Pagamento realizado com sucesso!");
                                 pagamentoOk = true;
                             }
@@ -238,10 +261,13 @@ namespace Cantina2._0
                 case 4: // Vale Refeição
                 case 5: // Vale Alimentação
                     MessageBox.Show(
-                        $"Cliente: {nome}\n\n" +
-                        $"Itens:{Carrinho.Items}" +
-                        $"Total a pagar: R${total:F2}\n\n" +
-                        "COMANDA");
+                     $"🧾 COMANDA\n\n" +
+                     $"Cliente: {nome}\n\n" +
+                     $"Itens:\n{extrato}\n" +
+                     $"-----------------------------\n" +
+                     $"Total a pagar: R${total:F2}\n",
+                     "Resumo do Pedido"
+                    );
                     MessageBox.Show("Pagamento realizado com sucesso!");
                     pagamentoOk = true;
                     break;

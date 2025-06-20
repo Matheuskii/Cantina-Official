@@ -8,31 +8,24 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\25163072\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\mahme\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\25163072\\Downloads\\Matheus Alves de Melo\\Cantina-Trabalho final\\Cantina-Official\\Cantina2.0\\Cantina2.0.csproj",
+      "projectUniqueName": "C:\\Users\\mahme\\OneDrive\\Documents\\Matheus\\Repositorios\\Cantina-Senai\\Cantina-Official\\Cantina2.0\\Cantina2.0.csproj",
       "projectName": "Cantina2.0",
-      "projectPath": "C:\\Users\\25163072\\Downloads\\Matheus Alves de Melo\\Cantina-Trabalho final\\Cantina-Official\\Cantina2.0\\Cantina2.0.csproj",
-      "packagesPath": "C:\\Users\\25163072\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\25163072\\Downloads\\Matheus Alves de Melo\\Cantina-Trabalho final\\Cantina-Official\\Cantina2.0\\obj\\",
+      "projectPath": "C:\\Users\\mahme\\OneDrive\\Documents\\Matheus\\Repositorios\\Cantina-Senai\\Cantina-Official\\Cantina2.0\\Cantina2.0.csproj",
+      "packagesPath": "C:\\Users\\mahme\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mahme\\OneDrive\\Documents\\Matheus\\Repositorios\\Cantina-Senai\\Cantina-Official\\Cantina2.0\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\25163072\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\mahme\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -51,7 +44,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -67,6 +60,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.17, 8.0.17]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.17, 8.0.17]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.17, 8.0.17]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.17, 8.0.17]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -75,7 +86,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
