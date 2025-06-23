@@ -65,6 +65,7 @@ namespace Cantina2._0
             // 
             // listBox1
             // 
+            listBox1.BackColor = Color.FromArgb(243, 241, 238);
             listBox1.ForeColor = Color.FromArgb(17, 25, 12);
             listBox1.FormattingEnabled = true;
             listBox1.Location = new Point(693, 95);

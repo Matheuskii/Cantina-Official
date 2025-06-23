@@ -21,9 +21,8 @@ namespace Cantina2._0
         {
 
             InitializeComponent();
-  
-
             pictureBox1.TabStop = false;
+
             
             CarregarPedidos();
 

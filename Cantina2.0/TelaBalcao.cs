@@ -133,6 +133,24 @@ namespace Cantina2._0
                     pedido.Status = ProximoStatus(pedido.Status);
                     CarregarPedidos();
                     dataGridView1.ClearSelection();
+                    if (pedido.Status == StatusPedido.Entregue)
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show("Deseja retirar o pedido da lista?", "Confirmação", buttons);
+                        if (result == DialogResult.No)
+                        {
+                            return;
+                        }
+                        BancoDePedidos.BancoPedidos.pedidosProBalcao.Remove(pedido);
+                        MessageBox.Show("Pedido removido com sucesso!");
+                        listBox1.Items.Clear();
+                        CarregarPedidos();
+                       
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Status atualizado para:{pedido.Status}");
+                    }
                 }
                 else
                 {
@@ -151,7 +169,6 @@ namespace Cantina2._0
                 var nomeCliente = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
                 var dataString = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
 
-                // CORRIGIDO: Busca apenas pelo nome do cliente para evitar problemas de data
                 var pedido = BancoDePedidos.BancoPedidos.GetPedidosProBalcao()
                     .FirstOrDefault(p => p.NomeCliente == nomeCliente);
 

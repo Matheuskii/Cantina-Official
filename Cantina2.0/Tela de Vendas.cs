@@ -72,7 +72,6 @@ namespace Cantina2._0
 
             total += produtoSelecionado.Preco * QuantidadeSelecionada;
             lblTotal.Text = $"Total: R$ {total:F2}";
-            // Limpa a seleção e o valor da quantidade após adicionar o item
             ListDisp.ClearSelected();
             boxQuantity.Value = 1;
         }
@@ -173,11 +172,13 @@ namespace Cantina2._0
         private void finishBtn_Click(object sender, EventArgs e)
         {
             string nome = textBox1.Text;
-            if (string.IsNullOrWhiteSpace(nome))
+         
+            if (string.IsNullOrEmpty(nome))
             {
                 MessageBox.Show("Por favor, insira o nome do cliente.", "Erro");
                 return;
             }
+ 
             if (Carrinho.Items.Count == 0)
             {
                 MessageBox.Show("O carrinho está vazio. Adicione itens antes de finalizar o pedido.", "Erro");
@@ -194,7 +195,12 @@ namespace Cantina2._0
             double valorPago = 0;
             double troco = 0;
             bool pagamentoOk = false;
-            string extrato = string.Join("\n", Carrinho.Items.Cast<object>().Select(item => item.ToString()));
+            string extrato = "";
+            foreach (string item in Carrinho.Items)
+            {
+                extrato += item + Environment.NewLine;
+            }
+
 
             switch (metodoPagamento)
             {

@@ -44,17 +44,18 @@
             comboBox1 = new ComboBox();
             imageList1 = new ImageList(components);
             imageList2 = new ImageList(components);
-            pictureBox1 = new PictureBox();
             label1 = new Label();
             label5 = new Label();
             fileSystemWatcher1 = new FileSystemWatcher();
             checkViagem = new CheckBox();
             button1 = new Button();
             button2 = new Button();
+            lblTotal = new Label();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)boxQuantity).BeginInit();
             ((System.ComponentModel.ISupportInitialize)boxRemove).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // AddButton
@@ -202,21 +203,6 @@
             imageList2.ImageSize = new Size(16, 16);
             imageList2.TransparentColor = Color.Transparent;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
-            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.ErrorImage = (Image)resources.GetObject("pictureBox1.ErrorImage");
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
-            pictureBox1.Location = new Point(12, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(203, 64);
-            pictureBox1.TabIndex = 19;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -280,12 +266,36 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += BtnCozinha_Click;
             // 
+            // lblTotal
+            // 
+            lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("Agrandir Semi Narrow", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotal.Location = new Point(71, 363);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(76, 36);
+            lblTotal.TabIndex = 26;
+            lblTotal.Text = "Total";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.ErrorImage = (Image)resources.GetObject("pictureBox1.ErrorImage");
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
+            pictureBox1.Location = new Point(8, 13);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(207, 63);
+            pictureBox1.TabIndex = 19;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
             // Tela_Chamada
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
+            Controls.Add(lblTotal);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(checkViagem);
@@ -309,8 +319,8 @@
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)boxQuantity).EndInit();
             ((System.ComponentModel.ISupportInitialize)boxRemove).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -331,12 +341,13 @@
         private ComboBox comboBox1;
         private ImageList imageList1;
         private ImageList imageList2;
-        private PictureBox pictureBox1;
         private Label label1;
         private Label label5;
         private FileSystemWatcher fileSystemWatcher1;
         private CheckBox checkViagem;
         private Button button2;
         private Button button1;
+        private Label lblTotal;
+        private PictureBox pictureBox1;
     }
 }

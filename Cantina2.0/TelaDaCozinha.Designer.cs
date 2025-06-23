@@ -30,7 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaCozinha));
-            pictureBox1 = new PictureBox();
             form1BindingSource = new BindingSource(components);
             form1BindingSource1 = new BindingSource(components);
             form1BindingSource2 = new BindingSource(components);
@@ -39,26 +38,13 @@
             label5 = new Label();
             label1 = new Label();
             listBox1 = new ListBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
-            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.ErrorImage = (Image)resources.GetObject("pictureBox1.ErrorImage");
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
-            pictureBox1.Location = new Point(22, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(203, 64);
-            pictureBox1.TabIndex = 20;
-            pictureBox1.TabStop = false;
             // 
             // form1BindingSource
             // 
@@ -119,6 +105,7 @@
             // 
             // listBox1
             // 
+            listBox1.BackColor = Color.FromArgb(243, 241, 238);
             listBox1.Font = new Font("Agrandir Narrow Medium", 8.999999F, FontStyle.Bold, GraphicsUnit.Point, 0);
             listBox1.ForeColor = Color.FromArgb(17, 25, 12);
             listBox1.FormattingEnabled = true;
@@ -127,32 +114,43 @@
             listBox1.Size = new Size(188, 260);
             listBox1.TabIndex = 27;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.ErrorImage = (Image)resources.GetObject("pictureBox1.ErrorImage");
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
+            pictureBox1.Location = new Point(18, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(207, 63);
+            pictureBox1.TabIndex = 28;
+            pictureBox1.TabStop = false;
+            // 
             // TelaCozinha
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 255, 0);
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
             Controls.Add(listBox1);
             Controls.Add(label5);
             Controls.Add(label1);
             Controls.Add(btnEntregue);
             Controls.Add(dataGridView1);
-            Controls.Add(pictureBox1);
             Name = "TelaCozinha";
             Text = "Form2";
             Load += Form2_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)form1BindingSource2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private PictureBox pictureBox1;
         private BindingSource form1BindingSource;
         private BindingSource form1BindingSource1;
         private BindingSource form1BindingSource2;
@@ -164,5 +162,6 @@
         private Label label5;
         private Label label1;
         private ListBox listBox1;
+        private PictureBox pictureBox1;
     }
 }
